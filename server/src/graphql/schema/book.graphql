@@ -1,4 +1,4 @@
-type Book {
+type Task {
   title: String
-  author: String
+  description: String
 }
