@@ -1,6 +1,7 @@
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 import { loadSchemaSync } from "@graphql-tools/load";
 import path from "path";
+import taskList from "../db/TaskList";
 import { Resolvers } from "../__generated__/resolvers-types";
 
 export const typeDefs = loadSchemaSync(
