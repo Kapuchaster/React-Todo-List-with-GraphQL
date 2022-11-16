@@ -1,0 +1,7 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "Example App of connecting React with GQL",
+  "author": "Michal Kapuscinski",
+  "license": "MIT"
+}
