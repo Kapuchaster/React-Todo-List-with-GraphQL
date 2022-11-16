@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "generate": "graphql-codegen --config codegen.ts",
-    "copy-schema-to-dist": "cp -r ./src/graphql/ ./dist/graphql/",
+    "copy-schema-to-dist": "cp -r ./src/graphql/ ./dist/src/graphql/",
     "build": "yarn generate && tsc && yarn copy-schema-to-dist",
     "start": "yarn build && node ./dist/src/index.js"
   },
