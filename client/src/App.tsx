@@ -1,4 +1,5 @@
 import { useQuery, gql } from "@apollo/client";
+import Dashboard from "./layouts/Dashboard/Dashboard";
 
 function App() {
   const GET_TASK_LIST = gql`
@@ -17,7 +18,11 @@ function App() {
 
   console.log(data);
 
-  return <div>init</div>;
+  return (
+    <Dashboard leftPanel={<>lp</>} rightPanel={<>rp</>}>
+      <>main</>
+    </Dashboard>
+  );
 }
 
 export default App;
