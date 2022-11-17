@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useQuery, gql } from "@apollo/client";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const GET_TASK_LIST = gql`
+    query GetTaskList {
+      taskList {
+        title
+        description
+      }
+    }
+  `;
+
+  const { loading, error, data } = useQuery(GET_TASK_LIST);
+
+  if (loading) console.log("loading");
+  if (error) console.log("loading");
+
+  console.log(data);
+
+  return <div>init</div>;
 }
 
 export default App;
