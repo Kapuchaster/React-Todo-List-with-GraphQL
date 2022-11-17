@@ -19,7 +19,7 @@ function App() {
   console.log(data);
 
   return (
-    <Dashboard leftPanel={<>lp</>} rightPanel={<>rp</>}>
+    <Dashboard leftPanel={<>left-panel</>} rightPanel={<>right-panel</>}>
       <>main</>
     </Dashboard>
   );
