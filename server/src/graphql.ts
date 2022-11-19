@@ -1,11 +1,11 @@
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 import { loadSchemaSync } from "@graphql-tools/load";
 import path from "path";
-import taskList from "../db/TaskList";
-import { Resolvers } from "../__generated__/resolvers-types";
+import chatRoomList from "./db/ChatRooms";
+import { Resolvers } from "./__generated__/resolvers-types";
 
 export const typeDefs = loadSchemaSync(
-  path.join(__dirname, "./schema/", "*.graphql"),
+  path.join(__dirname, "../../common/schema/", "*.graphql"),
   {
     loaders: [new GraphQLFileLoader()],
   }
@@ -13,6 +13,6 @@ export const typeDefs = loadSchemaSync(
 
 export const resolvers: Resolvers = {
   Query: {
-    taskList: () => taskList,
+    chatRoomList: () => chatRoomList,
   },
 };

@@ -13,15 +13,16 @@ export type Scalars = {
   Float: number;
 };
 
-export type Query = {
-  __typename?: 'Query';
-  taskList: Array<Task>;
+export type ChatRoom = {
+  __typename?: 'ChatRoom';
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
 };
 
-export type Task = {
-  __typename?: 'Task';
-  description?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
+export type Query = {
+  __typename?: 'Query';
+  chatRoomList: Array<ChatRoom>;
 };
 
 
@@ -94,31 +95,32 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  ChatRoom: ResolverTypeWrapper<ChatRoom>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
-  Task: ResolverTypeWrapper<Task>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
+  ChatRoom: ChatRoom;
   Query: {};
   String: Scalars['String'];
-  Task: Task;
 };
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  taskList?: Resolver<Array<ResolversTypes['Task']>, ParentType, ContextType>;
-};
-
-export type TaskResolvers<ContextType = any, ParentType extends ResolversParentTypes['Task'] = ResolversParentTypes['Task']> = {
+export type ChatRoomResolvers<ContextType = any, ParentType extends ResolversParentTypes['ChatRoom'] = ResolversParentTypes['ChatRoom']> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  chatRoomList?: Resolver<Array<ResolversTypes['ChatRoom']>, ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
+  ChatRoom?: ChatRoomResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  Task?: TaskResolvers<ContextType>;
 };
 

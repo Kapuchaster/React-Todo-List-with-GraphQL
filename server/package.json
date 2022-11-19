@@ -1,12 +1,12 @@
 {
-  "name": "server",
+  "name": "@video-chat/server",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "generate": "graphql-codegen --config codegen.ts",
-    "copy-schema-to-dist": "cp -r ./src/graphql/ ./dist/src/graphql/",
-    "build": "yarn generate && tsc && yarn copy-schema-to-dist",
+    "copy-schema": "mkdir -p ./src/schema ./dist/src/schema && cp -r ../common/schema/ ./src/schema ./dist/src/schema",
+    "build": "yarn generate && tsc && yarn copy-schema",
     "start": "yarn build && node ./dist/src/index.js"
   },
   "dependencies": {

@@ -1,7 +1,14 @@
 {
-  "name": "todo-list",
+  "name": "@video-chat/app",
   "version": "1.0.0",
   "description": "Example App of connecting React with GQL",
+  "private": true,
+  "useWorkspaces": true,
+  "workspaces": [
+    "common",
+    "client",
+    "server"
+  ],
   "author": "Michal Kapuscinski",
   "license": "MIT"
 }

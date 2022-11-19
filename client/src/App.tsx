@@ -4,16 +4,17 @@ import Dashboard from "./layouts/Dashboard/Dashboard";
 import { ChatRoom } from "./types";
 
 function App() {
-  const GET_TASK_LIST = gql`
-    query GetTaskList {
-      taskList {
+  const GET_CHAT_ROOM_LIST = gql`
+    query GetChatRoomList {
+      chatRoomList {
+        id
         title
         description
       }
     }
   `;
 
-  const { loading, error, data } = useQuery(GET_TASK_LIST);
+  const { loading, error, data } = useQuery(GET_CHAT_ROOM_LIST);
 
   if (loading) console.log("loading");
   if (error) console.log("loading");
