@@ -1,0 +1,7 @@
+type Query {
+  chatRoomList: [ChatRoom!]!
+}
+
+schema {
+  query: Query
+}
