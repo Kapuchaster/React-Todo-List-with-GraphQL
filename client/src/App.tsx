@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useSubscription } from "@apollo/client";
 import ChatRoomsPanel from "./layouts/ChatRoomsPanel/ChatRoomsPanel";
 import Dashboard from "./layouts/Dashboard/Dashboard";
 import { ChatRoom } from "./types";
@@ -13,6 +13,24 @@ function App() {
       }
     }
   `;
+
+  const COMMENTS_SUBSCRIPTION = gql`
+    subscription XXX {
+      postCreated
+    }
+  `;
+
+  const { data: data2, loading: loading2 } = useSubscription(
+    COMMENTS_SUBSCRIPTION,
+    {
+      onSubscriptionData: () => {
+        console.log("okData");
+      },
+      variables: { postID: "postID" },
+    }
+  );
+
+  console.log(data2);
 
   const { loading, error, data } = useQuery(GET_CHAT_ROOM_LIST);
 

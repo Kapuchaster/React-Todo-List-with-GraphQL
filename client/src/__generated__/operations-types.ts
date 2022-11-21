@@ -23,3 +23,8 @@ export type Query = {
   __typename?: 'Query';
   chatRoomList: Array<ChatRoom>;
 };
+
+export type Subscription = {
+  __typename?: 'Subscription';
+  postCreated?: Maybe<Scalars['String']>;
+};

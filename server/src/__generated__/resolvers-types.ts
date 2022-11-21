@@ -25,6 +25,11 @@ export type Query = {
   chatRoomList: Array<ChatRoom>;
 };
 
+export type Subscription = {
+  __typename?: 'Subscription';
+  postCreated?: Maybe<Scalars['String']>;
+};
+
 
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -98,6 +103,7 @@ export type ResolversTypes = {
   ChatRoom: ResolverTypeWrapper<ChatRoom>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Subscription: ResolverTypeWrapper<{}>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -106,6 +112,7 @@ export type ResolversParentTypes = {
   ChatRoom: ChatRoom;
   Query: {};
   String: Scalars['String'];
+  Subscription: {};
 };
 
 export type ChatRoomResolvers<ContextType = any, ParentType extends ResolversParentTypes['ChatRoom'] = ResolversParentTypes['ChatRoom']> = {
@@ -119,8 +126,13 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   chatRoomList?: Resolver<Array<ResolversTypes['ChatRoom']>, ParentType, ContextType>;
 };
 
+export type SubscriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = {
+  postCreated?: SubscriptionResolver<Maybe<ResolversTypes['String']>, "postCreated", ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
   ChatRoom?: ChatRoomResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Subscription?: SubscriptionResolvers<ContextType>;
 };
 

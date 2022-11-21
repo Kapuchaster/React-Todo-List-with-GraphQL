@@ -2,6 +2,12 @@ type Query {
   chatRoomList: [ChatRoom!]!
 }
 
+type Subscription {
+  postCreated: String
+}
+
+
 schema {
   query: Query
+  subscription: Subscription
 }

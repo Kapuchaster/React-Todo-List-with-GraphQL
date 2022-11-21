@@ -11,16 +11,18 @@
   },
   "dependencies": {
     "@apollo/server": "4.1.1",
-    "graphql": "16.6.0"
+    "graphql": "16.6.0",
+    "graphql-subscriptions": "^2.0.0",
+    "graphql-ws": "^5.11.2"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.13.12",
+    "@graphql-codegen/introspection": "2.2.1",
     "@graphql-codegen/typescript": "2.8.1",
     "@graphql-codegen/typescript-resolvers": "2.7.6",
     "@graphql-tools/graphql-file-loader": "7.5.10",
     "@graphql-tools/load": "7.8.5",
     "@types/node": "18.11.9",
-    "typescript": "4.8.4",
-    "@graphql-codegen/introspection": "2.2.1"
+    "typescript": "4.8.4"
   }
 }
