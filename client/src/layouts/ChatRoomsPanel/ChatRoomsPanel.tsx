@@ -1,7 +1,7 @@
 import { ChatRoom } from "../../__generated__/operations-types";
 
 interface Props {
-  chatRoomList: ChatRoom[];
+  chatRoomList?: ChatRoom[];
 }
 
 const ChatRoomsPanel = ({ chatRoomList = [] }: Props) => {

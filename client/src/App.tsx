@@ -1,7 +1,6 @@
 import ChatRoomsPanel from "./layouts/ChatRoomsPanel/ChatRoomsPanel";
 import Dashboard from "./layouts/Dashboard/Dashboard";
 import {
-  ChatRoom,
   useChatRoomSubscription,
   useGetChatRoomListQuery,
 } from "./__generated__/operations-types";
@@ -18,14 +17,8 @@ function App() {
 
   console.log(data?.chatRoomList);
 
-  const mockedChatRoomList: ChatRoom[] = [
-    { id: "1", title: "title", description: "description" },
-    { id: "2", title: "title1", description: "description1" },
-    { id: "3", title: "title2", description: "description2" },
-  ];
-
   const DashboardLeftPanel = () => (
-    <ChatRoomsPanel chatRoomList={mockedChatRoomList} />
+    <ChatRoomsPanel chatRoomList={data?.chatRoomList} />
   );
 
   return (
