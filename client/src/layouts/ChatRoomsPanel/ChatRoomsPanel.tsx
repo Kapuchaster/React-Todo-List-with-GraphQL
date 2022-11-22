@@ -1,4 +1,4 @@
-import { ChatRoom } from "../../types";
+import { ChatRoom } from "../../__generated__/operations-types";
 
 interface Props {
   chatRoomList: ChatRoom[];

@@ -15,9 +15,9 @@ export type Scalars = {
 
 export type ChatRoom = {
   __typename?: 'ChatRoom';
-  description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
+  id: Scalars['String'];
+  title: Scalars['String'];
 };
 
 export type Query = {
@@ -116,9 +116,9 @@ export type ResolversParentTypes = {
 };
 
 export type ChatRoomResolvers<ContextType = any, ParentType extends ResolversParentTypes['ChatRoom'] = ResolversParentTypes['ChatRoom']> = {
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

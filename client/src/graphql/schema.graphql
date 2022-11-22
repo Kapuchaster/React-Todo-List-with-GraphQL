@@ -1,0 +1,11 @@
+query GetChatRoomList {
+  chatRoomList {
+    id
+    title
+    description
+  }
+}
+
+subscription ChatRoom {
+  postCreated
+}

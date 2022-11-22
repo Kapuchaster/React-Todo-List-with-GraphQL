@@ -1,43 +1,22 @@
-import { gql, useQuery, useSubscription } from "@apollo/client";
 import ChatRoomsPanel from "./layouts/ChatRoomsPanel/ChatRoomsPanel";
 import Dashboard from "./layouts/Dashboard/Dashboard";
-import { ChatRoom } from "./types";
+import {
+  ChatRoom,
+  useChatRoomSubscription,
+  useGetChatRoomListQuery,
+} from "./__generated__/operations-types";
 
 function App() {
-  const GET_CHAT_ROOM_LIST = gql`
-    query GetChatRoomList {
-      chatRoomList {
-        id
-        title
-        description
-      }
-    }
-  `;
-
-  const COMMENTS_SUBSCRIPTION = gql`
-    subscription XXX {
-      postCreated
-    }
-  `;
-
-  const { data: data2, loading: loading2 } = useSubscription(
-    COMMENTS_SUBSCRIPTION,
-    {
-      onSubscriptionData: () => {
-        console.log("okData");
-      },
-      variables: { postID: "postID" },
-    }
-  );
+  const { data: data2 } = useChatRoomSubscription();
 
   console.log(data2);
 
-  const { loading, error, data } = useQuery(GET_CHAT_ROOM_LIST);
+  const { data, loading, error } = useGetChatRoomListQuery();
 
   if (loading) console.log("loading");
   if (error) console.log("loading");
 
-  console.log(data);
+  console.log(data?.chatRoomList);
 
   const mockedChatRoomList: ChatRoom[] = [
     { id: "1", title: "title", description: "description" },

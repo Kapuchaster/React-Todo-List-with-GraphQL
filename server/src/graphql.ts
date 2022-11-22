@@ -18,7 +18,10 @@ const pubsub = new PubSub();
 export const resolvers = {
   Subscription: {
     postCreated: {
-      subscribe: () => pubsub.asyncIterator<string>("POST_CREATED"),
+      subscribe: () => {
+        console.log("pubsub");
+        return pubsub.asyncIterator<string>("POST_CREATED");
+      },
     },
   },
   Query: {
@@ -36,4 +39,4 @@ setInterval(() => {
   pubsub.publish("POST_CREATED", {
     postCreated: `testPubSub_${x}}`,
   });
-}, 1000);
+}, 2000);
