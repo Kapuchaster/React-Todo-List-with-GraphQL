@@ -7,9 +7,9 @@ import {
 } from "./__generated__/operations-types";
 
 function App() {
-  // const { data: data2 } = useChatRoomSubscription();
+  const { data: data2 } = useChatRoomSubscription();
 
-  // console.log(data2);
+  console.log(data2);
 
   const { data, loading, error } = useGetChatRoomListQuery();
 
@@ -18,15 +18,16 @@ function App() {
 
   console.log(data?.chatRoomList);
 
-  const [createChatRoomMutation] = useCreateChatRoomMutation({
-    variables: {
-      name: "value",
-    },
-  });
+  // const [createChatRoomMutation, { data, loading, error }] =
+  //   useCreateChatRoomMutation({
+  //     variables: {
+  //       name: "value",
+  //     },
+  //   });
 
   const handleAddNewRoom = () => {
     console.log("Add new room");
-    createChatRoomMutation();
+    // createChatRoomMutation();
   };
 
   const DashboardLeftPanel = () => (
