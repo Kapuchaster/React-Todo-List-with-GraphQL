@@ -2,9 +2,10 @@ import { ChatRoom } from "../../__generated__/operations-types";
 
 interface Props {
   chatRoomList?: ChatRoom[];
+  onAddNewRoom?: () => void;
 }
 
-const ChatRoomsPanel = ({ chatRoomList = [] }: Props) => {
+const ChatRoomsPanel = ({ chatRoomList = [], onAddNewRoom }: Props) => {
   return (
     <div>
       ChatRoomsPanel
@@ -13,6 +14,7 @@ const ChatRoomsPanel = ({ chatRoomList = [] }: Props) => {
           <div key={chatRoom.id}>{chatRoom.title}</div>
         ))}
       </div>
+      <button onClick={onAddNewRoom}>Add New Room</button>
     </div>
   );
 };

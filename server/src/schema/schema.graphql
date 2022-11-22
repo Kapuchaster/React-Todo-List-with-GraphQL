@@ -2,12 +2,16 @@ type Query {
   chatRoomList: [ChatRoom!]!
 }
 
+type Mutation {
+  createChatRoom(name: String): ChatRoom!
+}
+
 type Subscription {
   postCreated: String
 }
 
-
 schema {
   query: Query
+  mutation: Mutation
   subscription: Subscription
 }

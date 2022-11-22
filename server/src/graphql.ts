@@ -27,6 +27,13 @@ export const resolvers = {
   Query: {
     chatRoomList: () => chatRoomList,
   },
+  Mutation: {
+    createChatRoom: () => ({
+      id: "idd",
+      title: "titlee",
+      description: "descc",
+    }),
+  },
 };
 
 let x = 1;

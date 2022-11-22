@@ -20,6 +20,16 @@ export type ChatRoom = {
   title: Scalars['String'];
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  createChatRoom: ChatRoom;
+};
+
+
+export type MutationCreateChatRoomArgs = {
+  name?: InputMaybe<Scalars['String']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   chatRoomList: Array<ChatRoom>;
@@ -101,6 +111,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   ChatRoom: ResolverTypeWrapper<ChatRoom>;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Subscription: ResolverTypeWrapper<{}>;
@@ -110,6 +121,7 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   ChatRoom: ChatRoom;
+  Mutation: {};
   Query: {};
   String: Scalars['String'];
   Subscription: {};
@@ -122,6 +134,10 @@ export type ChatRoomResolvers<ContextType = any, ParentType extends ResolversPar
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createChatRoom?: Resolver<ResolversTypes['ChatRoom'], ParentType, ContextType, Partial<MutationCreateChatRoomArgs>>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   chatRoomList?: Resolver<Array<ResolversTypes['ChatRoom']>, ParentType, ContextType>;
 };
@@ -132,6 +148,7 @@ export type SubscriptionResolvers<ContextType = any, ParentType extends Resolver
 
 export type Resolvers<ContextType = any> = {
   ChatRoom?: ChatRoomResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Subscription?: SubscriptionResolvers<ContextType>;
 };

@@ -1,0 +1,7 @@
+mutation CreateChatRoom($name: String) {
+  createChatRoom(name: $name) {
+    id
+    title
+    description
+  }
+}
