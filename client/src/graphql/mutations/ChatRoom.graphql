@@ -1,5 +1,5 @@
-mutation CreateChatRoom($name: String) {
-  createChatRoom(name: $name) {
+mutation CreateChatRoom($input: CreateChatRoomInput) {
+  createChatRoom(input: $input) {
     id
     title
     description

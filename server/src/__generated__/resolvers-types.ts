@@ -20,6 +20,11 @@ export type ChatRoom = {
   title: Scalars['String'];
 };
 
+export type CreateChatRoomInput = {
+  description: Scalars['String'];
+  title: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createChatRoom: ChatRoom;
@@ -27,7 +32,7 @@ export type Mutation = {
 
 
 export type MutationCreateChatRoomArgs = {
-  name?: InputMaybe<Scalars['String']>;
+  input?: InputMaybe<CreateChatRoomInput>;
 };
 
 export type Query = {
@@ -111,6 +116,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   ChatRoom: ResolverTypeWrapper<ChatRoom>;
+  CreateChatRoomInput: CreateChatRoomInput;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -121,6 +127,7 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   ChatRoom: ChatRoom;
+  CreateChatRoomInput: CreateChatRoomInput;
   Mutation: {};
   Query: {};
   String: Scalars['String'];

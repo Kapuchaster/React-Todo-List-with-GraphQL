@@ -22,6 +22,11 @@ export type ChatRoom = {
   title: Scalars['String'];
 };
 
+export type CreateChatRoomInput = {
+  description: Scalars['String'];
+  title: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createChatRoom: ChatRoom;
@@ -29,7 +34,7 @@ export type Mutation = {
 
 
 export type MutationCreateChatRoomArgs = {
-  name?: InputMaybe<Scalars['String']>;
+  input?: InputMaybe<CreateChatRoomInput>;
 };
 
 export type Query = {
@@ -43,7 +48,7 @@ export type Subscription = {
 };
 
 export type CreateChatRoomMutationVariables = Exact<{
-  name?: InputMaybe<Scalars['String']>;
+  input?: InputMaybe<CreateChatRoomInput>;
 }>;
 
 
@@ -61,8 +66,8 @@ export type ChatRoomSubscription = { __typename?: 'Subscription', postCreated?: 
 
 
 export const CreateChatRoomDocument = gql`
-    mutation CreateChatRoom($name: String) {
-  createChatRoom(name: $name) {
+    mutation CreateChatRoom($input: CreateChatRoomInput) {
+  createChatRoom(input: $input) {
     id
     title
     description
@@ -84,7 +89,7 @@ export type CreateChatRoomMutationFn = Apollo.MutationFunction<CreateChatRoomMut
  * @example
  * const [createChatRoomMutation, { data, loading, error }] = useCreateChatRoomMutation({
  *   variables: {
- *      name: // value for 'name'
+ *      input: // value for 'input'
  *   },
  * });
  */

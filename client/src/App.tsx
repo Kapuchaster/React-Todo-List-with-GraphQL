@@ -18,16 +18,18 @@ function App() {
 
   console.log(data?.chatRoomList);
 
-  // const [createChatRoomMutation, { data, loading, error }] =
-  //   useCreateChatRoomMutation({
-  //     variables: {
-  //       name: "value",
-  //     },
-  //   });
+  const [createChatRoomMutation, { data: data3 }] = useCreateChatRoomMutation();
 
   const handleAddNewRoom = () => {
     console.log("Add new room");
-    // createChatRoomMutation();
+    createChatRoomMutation({
+      variables: {
+        input: {
+          title: "value",
+          description: "value",
+        },
+      },
+    });
   };
 
   const DashboardLeftPanel = () => (

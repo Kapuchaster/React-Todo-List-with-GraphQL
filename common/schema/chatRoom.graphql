@@ -3,3 +3,8 @@ type ChatRoom {
   title: String!
   description: String!
 }
+
+input CreateChatRoomInput {
+  title: String!
+  description: String!
+}

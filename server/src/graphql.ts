@@ -14,12 +14,11 @@ export const typeDefs = loadSchemaSync(
 
 const pubsub = new PubSub();
 
-// export const resolvers: Resolvers = {
 export const resolvers = {
+  // export const resolvers: Resolvers = {
   Subscription: {
     postCreated: {
       subscribe: () => {
-        console.log("pubsub");
         return pubsub.asyncIterator<string>("POST_CREATED");
       },
     },
@@ -28,22 +27,27 @@ export const resolvers = {
     chatRoomList: () => chatRoomList,
   },
   Mutation: {
-    createChatRoom: () => ({
-      id: "idd",
-      title: "titlee",
-      description: "descc",
-    }),
+    createChatRoom: (_obj, args, _context, _info) => {
+      const { title, description } = args.input;
+      console.log("args", title, description);
+
+      return {
+        id: "idd",
+        title,
+        description,
+      };
+    },
   },
 };
 
-let x = 1;
-console.log("000init");
+// let x = 1;
+// console.log("000init");
 
-setInterval(() => {
-  x++;
-  console.log("incr", x);
+// setInterval(() => {
+//   x++;
+//   console.log("incr", x);
 
-  pubsub.publish("POST_CREATED", {
-    postCreated: `testPubSub_${x}}`,
-  });
-}, 2000);
+//   pubsub.publish("POST_CREATED", {
+//     postCreated: `testPubSub_${x}}`,
+//   });
+// }, 2000);
