@@ -1,27 +1,36 @@
+import { useEffect, useState } from "react";
 import ChatRoomsPanel from "./layouts/ChatRoomsPanel/ChatRoomsPanel";
 import Dashboard from "./layouts/Dashboard/Dashboard";
 import {
+  ChatRoom,
   useChatRoomSubscription,
   useCreateChatRoomMutation,
-  useGetChatRoomListQuery,
+  useGetChatRoomListLazyQuery,
 } from "./__generated__/operations-types";
 
 function App() {
-  const { data: data2 } = useChatRoomSubscription();
+  const [chatRoomList, setChatRoomList] = useState<ChatRoom[]>([]);
 
-  console.log(data2);
+  // Query
+  const [getChatRoomList] = useGetChatRoomListLazyQuery();
+  // Subscription
+  const { data: chatRoomSubData } = useChatRoomSubscription();
+  // Mutation
+  const [createChatRoomMutation] = useCreateChatRoomMutation();
 
-  const { data, loading, error } = useGetChatRoomListQuery();
+  useEffect(() => {
+    getChatRoomList().then((response) =>
+      setChatRoomList(response.data?.chatRoomList ?? [])
+    );
+  }, [getChatRoomList]);
 
-  if (loading) console.log("loading");
-  if (error) console.log("loading");
-
-  console.log(data?.chatRoomList);
-
-  const [createChatRoomMutation, { data: data3 }] = useCreateChatRoomMutation();
+  useEffect(() => {
+    if (chatRoomSubData) {
+      setChatRoomList((state) => [...state, chatRoomSubData?.chatRoomCreated]);
+    }
+  }, [chatRoomSubData]);
 
   const handleAddNewRoom = () => {
-    console.log("Add new room");
     createChatRoomMutation({
       variables: {
         input: {
@@ -34,7 +43,7 @@ function App() {
 
   const DashboardLeftPanel = () => (
     <ChatRoomsPanel
-      chatRoomList={data?.chatRoomList}
+      chatRoomList={chatRoomList}
       onAddNewRoom={handleAddNewRoom}
     />
   );

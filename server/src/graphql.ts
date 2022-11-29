@@ -3,7 +3,7 @@ import { loadSchemaSync } from "@graphql-tools/load";
 import { PubSub } from "graphql-subscriptions";
 import path from "path";
 import chatRoomList from "./db/ChatRooms";
-import { Resolvers } from "./__generated__/resolvers-types";
+import { ChatRoom, Resolvers } from "./__generated__/resolvers-types";
 
 export const typeDefs = loadSchemaSync(
   path.join(__dirname, "./schema/", "*.graphql"),
@@ -14,12 +14,12 @@ export const typeDefs = loadSchemaSync(
 
 const pubsub = new PubSub();
 
-export const resolvers = {
-  // export const resolvers: Resolvers = {
+export const resolvers: Resolvers = {
   Subscription: {
-    postCreated: {
+    chatRoomCreated: {
       subscribe: () => {
-        return pubsub.asyncIterator<string>("POST_CREATED");
+        //TODO What's the type of asyncInterator?
+        return pubsub.asyncIterator<ChatRoom>("CHAT_ROOM_CREATED") as any;
       },
     },
   },
@@ -29,25 +29,20 @@ export const resolvers = {
   Mutation: {
     createChatRoom: (_obj, args, _context, _info) => {
       const { title, description } = args.input;
-      console.log("args", title, description);
+
+      pubsub.publish("CHAT_ROOM_CREATED", {
+        chatRoomCreated: {
+          id: "id_newSub",
+          title,
+          description,
+        },
+      });
 
       return {
-        id: "idd",
+        id: "id_new",
         title,
         description,
       };
     },
   },
 };
-
-// let x = 1;
-// console.log("000init");
-
-// setInterval(() => {
-//   x++;
-//   console.log("incr", x);
-
-//   pubsub.publish("POST_CREATED", {
-//     postCreated: `testPubSub_${x}}`,
-//   });
-// }, 2000);

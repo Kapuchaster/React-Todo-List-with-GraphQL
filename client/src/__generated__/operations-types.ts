@@ -44,7 +44,7 @@ export type Query = {
 
 export type Subscription = {
   __typename?: 'Subscription';
-  postCreated?: Maybe<Scalars['String']>;
+  chatRoomCreated: ChatRoom;
 };
 
 export type CreateChatRoomMutationVariables = Exact<{
@@ -62,7 +62,7 @@ export type GetChatRoomListQuery = { __typename?: 'Query', chatRoomList: Array<{
 export type ChatRoomSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ChatRoomSubscription = { __typename?: 'Subscription', postCreated?: string | null };
+export type ChatRoomSubscription = { __typename?: 'Subscription', chatRoomCreated: { __typename?: 'ChatRoom', id: string, title: string, description: string } };
 
 
 export const CreateChatRoomDocument = gql`
@@ -138,7 +138,11 @@ export type GetChatRoomListLazyQueryHookResult = ReturnType<typeof useGetChatRoo
 export type GetChatRoomListQueryResult = Apollo.QueryResult<GetChatRoomListQuery, GetChatRoomListQueryVariables>;
 export const ChatRoomDocument = gql`
     subscription ChatRoom {
-  postCreated
+  chatRoomCreated {
+    id
+    title
+    description
+  }
 }
     `;
 

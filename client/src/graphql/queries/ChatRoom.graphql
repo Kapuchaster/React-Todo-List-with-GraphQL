@@ -7,5 +7,9 @@ query GetChatRoomList {
 }
 
 subscription ChatRoom {
-  postCreated
+  chatRoomCreated {
+    id
+    title
+    description
+  }
 }

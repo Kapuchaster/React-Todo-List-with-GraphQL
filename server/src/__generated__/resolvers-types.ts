@@ -42,7 +42,7 @@ export type Query = {
 
 export type Subscription = {
   __typename?: 'Subscription';
-  postCreated?: Maybe<Scalars['String']>;
+  chatRoomCreated: ChatRoom;
 };
 
 
@@ -150,7 +150,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type SubscriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = {
-  postCreated?: SubscriptionResolver<Maybe<ResolversTypes['String']>, "postCreated", ParentType, ContextType>;
+  chatRoomCreated?: SubscriptionResolver<ResolversTypes['ChatRoom'], "chatRoomCreated", ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {

@@ -1,4 +1,4 @@
-import { ChatRoom } from "../types";
+import { ChatRoom } from "../__generated__/resolvers-types";
 
 const chatRoomList: ChatRoom[] = [
   {

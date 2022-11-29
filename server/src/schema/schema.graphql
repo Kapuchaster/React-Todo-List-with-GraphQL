@@ -7,7 +7,7 @@ type Mutation {
 }
 
 type Subscription {
-  postCreated: String
+  chatRoomCreated: ChatRoom!
 }
 
 schema {
