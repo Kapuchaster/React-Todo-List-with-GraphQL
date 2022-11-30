@@ -32,14 +32,14 @@ export const resolvers: Resolvers = {
 
       pubsub.publish("CHAT_ROOM_CREATED", {
         chatRoomCreated: {
-          id: "id_newSub",
+          id: title,
           title,
           description,
         },
       });
 
       return {
-        id: "id_new",
+        id: title,
         title,
         description,
       };

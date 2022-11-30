@@ -30,12 +30,12 @@ function App() {
     }
   }, [chatRoomSubData]);
 
-  const handleAddNewRoom = () => {
+  const handleAddNewRoom = (title: string, description: string) => {
     createChatRoomMutation({
       variables: {
         input: {
-          title: "value",
-          description: "value",
+          title,
+          description,
         },
       },
     });
