@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ModalContext } from "../../HOC/WithModal";
 import { ChatRoom } from "../../__generated__/operations-types";
 
 interface Props {
@@ -7,6 +8,8 @@ interface Props {
 }
 
 const ChatRoomsPanel = ({ chatRoomList = [], onAddNewRoom }: Props) => {
+  const modalContext = useContext(ModalContext);
+
   const [newRoom, setNewRoom] = useState({ title: "", description: "" });
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,7 +18,8 @@ const ChatRoomsPanel = ({ chatRoomList = [], onAddNewRoom }: Props) => {
   };
 
   const handleAddNewRoom = () => {
-    onAddNewRoom?.(newRoom.title, newRoom.description);
+    modalContext.open(<>Modal</>);
+    // onAddNewRoom?.(newRoom.title, newRoom.description);
   };
 
   return (

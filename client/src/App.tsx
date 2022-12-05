@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { WithModalContext } from "./HOC/WithModal";
 import ChatRoomsPanel from "./layouts/ChatRoomsPanel/ChatRoomsPanel";
 import Dashboard from "./layouts/Dashboard/Dashboard";
+
 import {
   ChatRoom,
   useChatRoomSubscription,
@@ -49,9 +51,14 @@ function App() {
   );
 
   return (
-    <Dashboard leftPanel={<DashboardLeftPanel />} rightPanel={<>right-panel</>}>
-      <>main</>
-    </Dashboard>
+    <WithModalContext>
+      <Dashboard
+        leftPanel={<DashboardLeftPanel />}
+        rightPanel={<>right-panel</>}
+      >
+        <>main</>
+      </Dashboard>
+    </WithModalContext>
   );
 }
 
