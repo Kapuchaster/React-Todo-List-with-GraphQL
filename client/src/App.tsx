@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { WithModalContext } from "./HOC/WithModal";
-import ChatRoomsPanel from "./layouts/ChatRoomsPanel/ChatRoomsPanel";
-import Dashboard from "./layouts/Dashboard/Dashboard";
+import ChatRoomsPanel from "./components/ChatRoomsPanel/ChatRoomsPanel";
+import Dashboard from "./pages/Dashboard";
 
 import {
   ChatRoom,
