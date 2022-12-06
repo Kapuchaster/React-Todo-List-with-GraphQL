@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Input from "../../../components/Input";
 import { ChatRoom } from "../../../__generated__/operations-types";
 
 interface Props {
@@ -11,8 +12,7 @@ interface Props {
 const CreateRoom = ({ onAddNewRoom }: Props) => {
   const [newRoom, setNewRoom] = useState({ title: "", description: "" });
 
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+  const handleChangeInput = (value: string, name: string) => {
     setNewRoom({ ...newRoom, [name]: value });
   };
 
@@ -22,8 +22,8 @@ const CreateRoom = ({ onAddNewRoom }: Props) => {
 
   return (
     <div>
-      <input name="title" value={newRoom.title} onChange={handleChangeInput} />
-      <input
+      <Input name="title" value={newRoom.title} onChange={handleChangeInput} />
+      <Input
         name="description"
         value={newRoom.description}
         onChange={handleChangeInput}

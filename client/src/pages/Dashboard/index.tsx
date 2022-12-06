@@ -5,6 +5,7 @@ import {
   useCreateChatRoomMutation,
 } from "../../__generated__/operations-types";
 import ChatRoomsPanel from "./ChatRoomsPanel";
+import ChatWindow from "./ChatWindow";
 
 import "./style.css";
 
@@ -42,7 +43,9 @@ const Dashboard = ({ chatRoomList }: Props) => {
           onAddChatRoom={handleAddNewRoom}
         />
       </AsidePanel>
-      <main>main</main>
+      <main>
+        <ChatWindow />
+      </main>
       <AsidePanel
         isOpen={isRightPanelOpen}
         onIsOpenChange={setRightPanel}

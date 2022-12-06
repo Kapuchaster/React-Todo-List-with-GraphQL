@@ -22,10 +22,15 @@ const ChatRoomsPanel = ({ chatRoomList = [], onAddChatRoom }: Props) => {
 
   return (
     <div className="chatRoomPanel--container">
-      ChatRoomsPanel
+      <h1>ChatRoomsPanel</h1>
       <div>
         {chatRoomList.map((chatRoom) => (
-          <div key={chatRoom.id}>{chatRoom.title}</div>
+          <Button
+            key={chatRoom.id}
+            title={chatRoom.title}
+            variant="secondary"
+            onClick={() => {}}
+          />
         ))}
         <Button title="Add" variant="primary" onClick={openCreateModal} />
       </div>
