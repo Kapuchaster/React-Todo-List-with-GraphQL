@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { ChatRoom } from "../../../__generated__/operations-types";
 
 interface Props {
-  onAddNewRoom: (title: string, description: string) => void;
+  onAddNewRoom: (
+    title: ChatRoom["title"],
+    description: ChatRoom["description"]
+  ) => void;
 }
 
 const CreateRoom = ({ onAddNewRoom }: Props) => {
-  // const modalContext = useContext(ModalContext);
-
   const [newRoom, setNewRoom] = useState({ title: "", description: "" });
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {

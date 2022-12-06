@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AsidePanel } from "../../components/layouts";
+import { AsidePanel } from "../../components";
 import {
   ChatRoom,
   useCreateChatRoomMutation,
