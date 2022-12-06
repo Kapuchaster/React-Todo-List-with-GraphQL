@@ -1,14 +1,15 @@
-import { ReactElement, useState } from "react";
-import { AsidePanel } from "../../layouts";
+import { useState } from "react";
+import { AsidePanel } from "../../components/layouts";
+import { ChatRoom } from "../../__generated__/operations-types";
+import ChatRoomsPanel from "./ChatRoomsPanel";
+
 import "./style.css";
 
 interface Props {
-  leftPanel: ReactElement;
-  rightPanel: ReactElement;
-  children: ReactElement;
+  chatRoomList: ChatRoom[];
 }
 
-const Dashboard = ({ leftPanel, rightPanel, children }: Props) => {
+const Dashboard = ({ chatRoomList }: Props) => {
   const [isLeftPanelOpen, setLeftPanel] = useState(true);
   const [isRightPanelOpen, setRightPanel] = useState(true);
 
@@ -19,15 +20,15 @@ const Dashboard = ({ leftPanel, rightPanel, children }: Props) => {
         onIsOpenChange={setLeftPanel}
         side="left"
       >
-        {leftPanel}
+        <ChatRoomsPanel chatRoomList={chatRoomList} />
       </AsidePanel>
-      <main>{children}</main>
+      <main>main</main>
       <AsidePanel
         isOpen={isRightPanelOpen}
         onIsOpenChange={setRightPanel}
         side="right"
       >
-        {rightPanel}
+        <>right-panel</>
       </AsidePanel>
     </div>
   );

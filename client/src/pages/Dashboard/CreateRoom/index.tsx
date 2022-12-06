@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
-import { ModalContext } from "../../HOC/WithModal";
-import { ChatRoom } from "../../__generated__/operations-types";
+import { ModalContext } from "../../../HOC/WithModal";
+import { ChatRoom } from "../../../__generated__/operations-types";
 
 interface Props {
   chatRoomList?: ChatRoom[];
   onAddNewRoom?: (title: string, description: string) => void;
 }
 
-const ChatRoomsPanel = ({ chatRoomList = [], onAddNewRoom }: Props) => {
+const CreateRoom = ({ chatRoomList = [], onAddNewRoom }: Props) => {
   const modalContext = useContext(ModalContext);
 
   const [newRoom, setNewRoom] = useState({ title: "", description: "" });
@@ -24,12 +24,6 @@ const ChatRoomsPanel = ({ chatRoomList = [], onAddNewRoom }: Props) => {
 
   return (
     <div>
-      ChatRoomsPanel
-      <div>
-        {chatRoomList.map((chatRoom) => (
-          <div key={chatRoom.id}>{chatRoom.title}</div>
-        ))}
-      </div>
       <input name="title" value={newRoom.title} onChange={handleChangeInput} />
       <input
         name="description"
@@ -41,4 +35,4 @@ const ChatRoomsPanel = ({ chatRoomList = [], onAddNewRoom }: Props) => {
   );
 };
 
-export default ChatRoomsPanel;
+export default CreateRoom;

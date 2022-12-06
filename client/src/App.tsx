@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { WithModalContext } from "./HOC/WithModal";
-import ChatRoomsPanel from "./components/ChatRoomsPanel/ChatRoomsPanel";
 import Dashboard from "./pages/Dashboard";
 
 import {
   ChatRoom,
   useChatRoomSubscription,
-  useCreateChatRoomMutation,
   useGetChatRoomListLazyQuery,
 } from "./__generated__/operations-types";
 
@@ -17,8 +15,6 @@ function App() {
   const [getChatRoomList] = useGetChatRoomListLazyQuery();
   // Subscription
   const { data: chatRoomSubData } = useChatRoomSubscription();
-  // Mutation
-  const [createChatRoomMutation] = useCreateChatRoomMutation();
 
   useEffect(() => {
     getChatRoomList().then((response) =>
@@ -32,32 +28,9 @@ function App() {
     }
   }, [chatRoomSubData]);
 
-  const handleAddNewRoom = (title: string, description: string) => {
-    createChatRoomMutation({
-      variables: {
-        input: {
-          title,
-          description,
-        },
-      },
-    });
-  };
-
-  const DashboardLeftPanel = () => (
-    <ChatRoomsPanel
-      chatRoomList={chatRoomList}
-      onAddNewRoom={handleAddNewRoom}
-    />
-  );
-
   return (
     <WithModalContext>
-      <Dashboard
-        leftPanel={<DashboardLeftPanel />}
-        rightPanel={<>right-panel</>}
-      >
-        <>main</>
-      </Dashboard>
+      <Dashboard chatRoomList={chatRoomList} />
     </WithModalContext>
   );
 }
