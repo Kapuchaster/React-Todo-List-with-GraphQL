@@ -1,14 +1,11 @@
-import { useContext, useState } from "react";
-import { ModalContext } from "../../../HOC/WithModal";
-import { ChatRoom } from "../../../__generated__/operations-types";
+import { useState } from "react";
 
 interface Props {
-  chatRoomList?: ChatRoom[];
-  onAddNewRoom?: (title: string, description: string) => void;
+  onAddNewRoom: (title: string, description: string) => void;
 }
 
-const CreateRoom = ({ chatRoomList = [], onAddNewRoom }: Props) => {
-  const modalContext = useContext(ModalContext);
+const CreateRoom = ({ onAddNewRoom }: Props) => {
+  // const modalContext = useContext(ModalContext);
 
   const [newRoom, setNewRoom] = useState({ title: "", description: "" });
 
@@ -18,8 +15,7 @@ const CreateRoom = ({ chatRoomList = [], onAddNewRoom }: Props) => {
   };
 
   const handleAddNewRoom = () => {
-    modalContext.open(<>Modal</>);
-    // onAddNewRoom?.(newRoom.title, newRoom.description);
+    onAddNewRoom(newRoom.title, newRoom.description);
   };
 
   return (

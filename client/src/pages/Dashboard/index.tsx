@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { AsidePanel } from "../../components/layouts";
-import { ChatRoom } from "../../__generated__/operations-types";
+import {
+  ChatRoom,
+  useCreateChatRoomMutation,
+} from "../../__generated__/operations-types";
 import ChatRoomsPanel from "./ChatRoomsPanel";
 
 import "./style.css";
@@ -13,6 +16,20 @@ const Dashboard = ({ chatRoomList }: Props) => {
   const [isLeftPanelOpen, setLeftPanel] = useState(true);
   const [isRightPanelOpen, setRightPanel] = useState(true);
 
+  // Mutation
+  const [createChatRoomMutation] = useCreateChatRoomMutation();
+
+  const handleAddNewRoom = (title: string, description: string) => {
+    createChatRoomMutation({
+      variables: {
+        input: {
+          title,
+          description,
+        },
+      },
+    });
+  };
+
   return (
     <div className="dashboard--container">
       <AsidePanel
@@ -20,7 +37,10 @@ const Dashboard = ({ chatRoomList }: Props) => {
         onIsOpenChange={setLeftPanel}
         side="left"
       >
-        <ChatRoomsPanel chatRoomList={chatRoomList} />
+        <ChatRoomsPanel
+          chatRoomList={chatRoomList}
+          onAddChatRoom={handleAddNewRoom}
+        />
       </AsidePanel>
       <main>main</main>
       <AsidePanel
@@ -28,7 +48,7 @@ const Dashboard = ({ chatRoomList }: Props) => {
         onIsOpenChange={setRightPanel}
         side="right"
       >
-        <>right-panel</>
+        <>Profile-panel</>
       </AsidePanel>
     </div>
   );

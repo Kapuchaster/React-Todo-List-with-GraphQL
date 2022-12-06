@@ -5,26 +5,15 @@ import CreateRoom from "../CreateRoom";
 
 interface Props {
   chatRoomList?: ChatRoom[];
+  onAddChatRoom: (title: string, description: string) => void;
 }
 
-const ChatRoomsPanel = ({ chatRoomList = [] }: Props) => {
+const ChatRoomsPanel = ({ chatRoomList = [], onAddChatRoom }: Props) => {
   const modalContext = useContext(ModalContext);
 
   const openCreateModal = () => {
-    modalContext.open(<CreateRoom />);
+    modalContext.open(<CreateRoom onAddNewRoom={onAddChatRoom} />);
   };
-  // Mutation
-  // const [createChatRoomMutation] = useCreateChatRoomMutation();
-  // const handleAddNewRoom = (title: string, description: string) => {
-  //   createChatRoomMutation({
-  //     variables: {
-  //       input: {
-  //         title,
-  //         description,
-  //       },
-  //     },
-  //   });
-  // };
 
   return (
     <div>
