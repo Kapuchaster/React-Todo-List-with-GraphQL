@@ -1,17 +1,14 @@
 import { useState } from "react";
 import { Button } from "../../../components";
 import Input from "../../../components/Input";
+import { ChatRoom } from "../../../__generated__/operations-types";
 import ChatBox from "./ChatBox";
 
-const __MockedChatBoxData__: { text: string; author: string; date: Date }[] = [
-  { text: "Hi how are you", author: "michal", date: new Date() },
-  { text: "Hi I am fine, and you?", author: "ania", date: new Date() },
-  { text: "thx me too", author: "michal", date: new Date() },
-];
+interface Props {
+  chatRoom: ChatRoom;
+}
 
-interface Props {}
-
-const ChatWindow = () => {
+const ChatWindow = ({ chatRoom }: Props) => {
   const [input, setInput] = useState("");
 
   const handleInputChange = (value: string) => {
@@ -19,11 +16,11 @@ const ChatWindow = () => {
   };
 
   const handleSendMessage = () => {
-    __MockedChatBoxData__.push({
-      text: input,
-      author: "author",
-      date: new Date(),
-    });
+    // __MockedChatBoxData__.push({
+    //   text: input,
+    //   author: "author",
+    //   date: new Date(),
+    // });
 
     setInput("");
   };
@@ -31,7 +28,8 @@ const ChatWindow = () => {
   return (
     <div>
       <h1>ChatWindow</h1>
-      <ChatBox messageDataList={__MockedChatBoxData__} />
+      <div>{chatRoom.title}</div>
+      <ChatBox messageDataList={chatRoom.messages} />
       <Input value={input} name="messageInput" onChange={handleInputChange} />
       <Button title=">" variant="primary" onClick={handleSendMessage} />
     </div>

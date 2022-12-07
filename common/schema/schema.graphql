@@ -4,10 +4,12 @@ type Query {
 
 type Mutation {
   createChatRoom(input: CreateChatRoomInput): ChatRoom!
+  createMessage(input: CreateMessageInput): Boolean!
 }
 
 type Subscription {
   chatRoomCreated: ChatRoom!
+  messageCreated: Message!
 }
 
 schema {

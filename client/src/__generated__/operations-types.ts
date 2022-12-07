@@ -19,6 +19,7 @@ export type ChatRoom = {
   __typename?: 'ChatRoom';
   description: Scalars['String'];
   id: Scalars['String'];
+  messages: Array<Message>;
   title: Scalars['String'];
 };
 
@@ -27,14 +28,33 @@ export type CreateChatRoomInput = {
   title: Scalars['String'];
 };
 
+export type CreateMessageInput = {
+  author: Scalars['String'];
+  text: Scalars['String'];
+};
+
+export type Message = {
+  __typename?: 'Message';
+  author: Scalars['String'];
+  id: Scalars['String'];
+  text: Scalars['String'];
+  timestamp: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createChatRoom: ChatRoom;
+  createMessage: Scalars['Boolean'];
 };
 
 
 export type MutationCreateChatRoomArgs = {
   input?: InputMaybe<CreateChatRoomInput>;
+};
+
+
+export type MutationCreateMessageArgs = {
+  input?: InputMaybe<CreateMessageInput>;
 };
 
 export type Query = {
@@ -45,6 +65,7 @@ export type Query = {
 export type Subscription = {
   __typename?: 'Subscription';
   chatRoomCreated: ChatRoom;
+  messageCreated: Message;
 };
 
 export type CreateChatRoomMutationVariables = Exact<{
@@ -57,12 +78,12 @@ export type CreateChatRoomMutation = { __typename?: 'Mutation', createChatRoom: 
 export type GetChatRoomListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetChatRoomListQuery = { __typename?: 'Query', chatRoomList: Array<{ __typename?: 'ChatRoom', id: string, title: string, description: string }> };
+export type GetChatRoomListQuery = { __typename?: 'Query', chatRoomList: Array<{ __typename?: 'ChatRoom', id: string, title: string, description: string, messages: Array<{ __typename?: 'Message', id: string, author: string, text: string, timestamp: string }> }> };
 
 export type ChatRoomSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ChatRoomSubscription = { __typename?: 'Subscription', chatRoomCreated: { __typename?: 'ChatRoom', id: string, title: string, description: string } };
+export type ChatRoomSubscription = { __typename?: 'Subscription', chatRoomCreated: { __typename?: 'ChatRoom', id: string, title: string, description: string, messages: Array<{ __typename?: 'Message', id: string, author: string, text: string, timestamp: string }> } };
 
 
 export const CreateChatRoomDocument = gql`
@@ -106,6 +127,12 @@ export const GetChatRoomListDocument = gql`
     id
     title
     description
+    messages {
+      id
+      author
+      text
+      timestamp
+    }
   }
 }
     `;
@@ -142,6 +169,12 @@ export const ChatRoomDocument = gql`
     id
     title
     description
+    messages {
+      id
+      author
+      text
+      timestamp
+    }
   }
 }
     `;

@@ -17,6 +17,7 @@ export type ChatRoom = {
   __typename?: 'ChatRoom';
   description: Scalars['String'];
   id: Scalars['String'];
+  messages: Array<Message>;
   title: Scalars['String'];
 };
 
@@ -25,14 +26,33 @@ export type CreateChatRoomInput = {
   title: Scalars['String'];
 };
 
+export type CreateMessageInput = {
+  author: Scalars['String'];
+  text: Scalars['String'];
+};
+
+export type Message = {
+  __typename?: 'Message';
+  author: Scalars['String'];
+  id: Scalars['String'];
+  text: Scalars['String'];
+  timestamp: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createChatRoom: ChatRoom;
+  createMessage: Scalars['Boolean'];
 };
 
 
 export type MutationCreateChatRoomArgs = {
   input?: InputMaybe<CreateChatRoomInput>;
+};
+
+
+export type MutationCreateMessageArgs = {
+  input?: InputMaybe<CreateMessageInput>;
 };
 
 export type Query = {
@@ -43,6 +63,7 @@ export type Query = {
 export type Subscription = {
   __typename?: 'Subscription';
   chatRoomCreated: ChatRoom;
+  messageCreated: Message;
 };
 
 
@@ -117,6 +138,8 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   ChatRoom: ResolverTypeWrapper<ChatRoom>;
   CreateChatRoomInput: CreateChatRoomInput;
+  CreateMessageInput: CreateMessageInput;
+  Message: ResolverTypeWrapper<Message>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -128,6 +151,8 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   ChatRoom: ChatRoom;
   CreateChatRoomInput: CreateChatRoomInput;
+  CreateMessageInput: CreateMessageInput;
+  Message: Message;
   Mutation: {};
   Query: {};
   String: Scalars['String'];
@@ -137,12 +162,22 @@ export type ResolversParentTypes = {
 export type ChatRoomResolvers<ContextType = any, ParentType extends ResolversParentTypes['ChatRoom'] = ResolversParentTypes['ChatRoom']> = {
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  messages?: Resolver<Array<ResolversTypes['Message']>, ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MessageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Message'] = ResolversParentTypes['Message']> = {
+  author?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  timestamp?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   createChatRoom?: Resolver<ResolversTypes['ChatRoom'], ParentType, ContextType, Partial<MutationCreateChatRoomArgs>>;
+  createMessage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, Partial<MutationCreateMessageArgs>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -151,10 +186,12 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type SubscriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = {
   chatRoomCreated?: SubscriptionResolver<ResolversTypes['ChatRoom'], "chatRoomCreated", ParentType, ContextType>;
+  messageCreated?: SubscriptionResolver<ResolversTypes['Message'], "messageCreated", ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
   ChatRoom?: ChatRoomResolvers<ContextType>;
+  Message?: MessageResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Subscription?: SubscriptionResolvers<ContextType>;

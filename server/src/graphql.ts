@@ -35,6 +35,7 @@ export const resolvers: Resolvers = {
           id: title,
           title,
           description,
+          messages: [],
         },
       });
 
@@ -42,6 +43,7 @@ export const resolvers: Resolvers = {
         id: title,
         title,
         description,
+        messages: [],
       };
     },
   },

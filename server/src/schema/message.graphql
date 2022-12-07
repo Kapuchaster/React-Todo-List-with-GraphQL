@@ -1,0 +1,11 @@
+type Message {
+  id: String!
+  author: String!
+  text: String!
+  timestamp: String!
+}
+
+input CreateMessageInput {
+  author: String!
+  text: String!
+}

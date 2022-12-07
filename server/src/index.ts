@@ -17,10 +17,7 @@ const httpServer = http.createServer(app);
 
 // Creating the WebSocket server
 const wsServer = new WebSocketServer({
-  // This is the `httpServer` we created in a previous step.
   server: httpServer,
-  // Pass a different path here if app.use
-  // serves expressMiddleware at a different path
   path: "/graphql",
 });
 
@@ -66,9 +63,7 @@ const startServer = async () => {
     httpServer.listen({ port: 4000 }, resolve)
   );
   console.log(`🚀 Query endpoint ready at http://localhost:4000/graphql`);
-  console.log(
-    `🚀 Subscription endpoint ready at ws://localhost:4000/graphql`
-  );
+  console.log(`🚀 Subscription endpoint ready at ws://localhost:4000/graphql`);
 };
 
 startServer();

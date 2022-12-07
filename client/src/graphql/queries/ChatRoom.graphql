@@ -3,6 +3,12 @@ query GetChatRoomList {
     id
     title
     description
+    messages {
+      id
+      author
+      text
+      timestamp
+    }
   }
 }
 
@@ -11,5 +17,11 @@ subscription ChatRoom {
     id
     title
     description
+    messages {
+      id
+      author
+      text
+      timestamp
+    }
   }
 }

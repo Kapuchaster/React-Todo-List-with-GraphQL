@@ -1,5 +1,5 @@
 interface Props {
-  messageDataList: { text: string; author: string; date: Date }[];
+  messageDataList: { text: string; author: string; timestamp: string }[];
 }
 
 const ChatBox = ({ messageDataList }: Props) => {

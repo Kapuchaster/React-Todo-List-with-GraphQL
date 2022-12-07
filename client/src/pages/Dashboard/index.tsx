@@ -44,7 +44,7 @@ const Dashboard = ({ chatRoomList }: Props) => {
         />
       </AsidePanel>
       <main>
-        <ChatWindow />
+        <ChatWindow chatRoom={chatRoomList[0]} />
       </main>
       <AsidePanel
         isOpen={isRightPanelOpen}

@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "generate": "graphql-codegen --config codegen.ts",
+    "generate": "graphql-codegen --config codegen.ts && yarn copy-schema",
     "copy-schema": "mkdir -p ./src/schema ./dist/src/schema && cp -r ../common/schema ./src/ && cp -r ../common/schema ./dist/src/",
-    "build": "yarn generate && tsc && yarn copy-schema",
+    "build": "yarn generate && tsc",
     "start": "yarn build && node ./dist/src/index.js"
   },
   "dependencies": {
