@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Input from "../../../components/Input";
-import { CreateChatRoomInput } from "../../../__generated__/operations-types";
+import Input from "../Input";
+import { CreateChatRoomInput } from "../../__generated__/operations-types";
 
 interface Props {
   onAddNewRoom: (input: CreateChatRoomInput) => void;

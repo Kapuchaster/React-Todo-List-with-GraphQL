@@ -9,6 +9,7 @@ import {
 } from "../../__generated__/operations-types";
 import ChatRoomsPanel from "./ChatRoomsPanel";
 import ChatWindow from "./ChatWindow";
+import ProfilPanel from "./ProfilPanel";
 
 import "./style.css";
 
@@ -63,7 +64,7 @@ const Dashboard = ({ chatRoomList }: Props) => {
         onIsOpenChange={setRightPanel}
         side="right"
       >
-        <>Profile-panel</>
+        <ProfilPanel />
       </AsidePanel>
     </div>
   );

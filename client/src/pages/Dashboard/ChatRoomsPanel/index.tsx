@@ -5,7 +5,7 @@ import {
   ChatRoom,
   CreateChatRoomInput,
 } from "../../../__generated__/operations-types";
-import CreateRoom from "../CreateRoom";
+import CreateRoom from "../../../components/CreateRoom";
 
 import "./style.css";
 interface Props {
