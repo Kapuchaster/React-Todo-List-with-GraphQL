@@ -21,7 +21,6 @@ function App() {
       setChatRoomList(response.data?.chatRoomList ?? [])
     );
   }, [getChatRoomList]);
-  console.log(chatRoomList);
 
   useEffect(() => {
     if (chatRoomSubData) {

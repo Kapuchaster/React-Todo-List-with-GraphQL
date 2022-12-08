@@ -24,6 +24,12 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
   const { data: messageSubData } = useMessageSubscription();
 
   useEffect(() => {
+    if (chatRoom) {
+      setMessageList(chatRoom?.messages);
+    }
+  }, [chatRoom]);
+
+  useEffect(() => {
     if (messageSubData) {
       setMessageList((state) => [...state, messageSubData?.messageCreated]);
     }
@@ -34,7 +40,9 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
   };
 
   const handleSendMessage = () => {
-    onCreateMessage({ author: "michal", text: input });
+    if (chatRoom) {
+      onCreateMessage({ roomId: chatRoom.id, author: "michal", text: input });
+    }
     setInput("");
   };
 

@@ -28,6 +28,7 @@ export type CreateChatRoomInput = {
 
 export type CreateMessageInput = {
   author: Scalars['String'];
+  roomId: Scalars['ID'];
   text: Scalars['String'];
 };
 
@@ -139,6 +140,7 @@ export type ResolversTypes = {
   ChatRoom: ResolverTypeWrapper<ChatRoom>;
   CreateChatRoomInput: CreateChatRoomInput;
   CreateMessageInput: CreateMessageInput;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   Message: ResolverTypeWrapper<Message>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
@@ -152,6 +154,7 @@ export type ResolversParentTypes = {
   ChatRoom: ChatRoom;
   CreateChatRoomInput: CreateChatRoomInput;
   CreateMessageInput: CreateMessageInput;
+  ID: Scalars['ID'];
   Message: Message;
   Mutation: {};
   Query: {};

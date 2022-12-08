@@ -1,9 +1,9 @@
 import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 import { loadSchemaSync } from "@graphql-tools/load";
-import { PubSub } from "graphql-subscriptions";
+import { PubSub, withFilter } from "graphql-subscriptions";
 import path from "path";
 import chatRoomList from "./db/ChatRooms";
-import { ChatRoom, Message, Resolvers } from "./__generated__/resolvers-types";
+import { ChatRoom, Message } from "./__generated__/resolvers-types";
 
 export const typeDefs = loadSchemaSync(
   path.join(__dirname, "./schema/", "*.graphql"),
@@ -14,7 +14,8 @@ export const typeDefs = loadSchemaSync(
 
 const pubsub = new PubSub();
 
-export const resolvers: Resolvers = {
+// export const resolvers: Resolvers = {
+export const resolvers = {
   Subscription: {
     chatRoomCreated: {
       subscribe: () => {
@@ -23,10 +24,18 @@ export const resolvers: Resolvers = {
       },
     },
     messageCreated: {
-      subscribe: () => {
-        //TODO What's the type of asyncInterator?
-        return pubsub.asyncIterator<Message>("NEW_MESSAGE") as any;
-      },
+      subscribe: withFilter(
+        () => {
+          //TODO What's the type of asyncInterator?
+          return pubsub.asyncIterator<Message & { roomId: string }>(
+            "NEW_MESSAGE"
+          ) as any;
+        },
+        (payload, variables) => {
+          console.log("---", payload, variables);
+          return true;
+        }
+      ),
     },
   },
   Query: {
@@ -53,16 +62,22 @@ export const resolvers: Resolvers = {
       };
     },
     createMessage: (_obj, args, _context, _info) => {
-      const { author, text } = args.input;
+      const { roomId, author, text } = args.input;
       const timestamp = Date.now().toString();
+      const newMessage = {
+        id: timestamp,
+        author,
+        text,
+        timestamp: timestamp,
+      };
+
+      const roomIndex = chatRoomList.findIndex(
+        (chatRoom) => chatRoom.id === roomId
+      );
+      chatRoomList[roomIndex].messages.push(newMessage);
 
       pubsub.publish("NEW_MESSAGE", {
-        messageCreated: {
-          id: timestamp,
-          author,
-          text,
-          timestamp: timestamp,
-        },
+        messageCreated: { ...newMessage, roomId },
       });
 
       return true;

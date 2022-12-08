@@ -30,6 +30,7 @@ export type CreateChatRoomInput = {
 
 export type CreateMessageInput = {
   author: Scalars['String'];
+  roomId: Scalars['ID'];
   text: Scalars['String'];
 };
 

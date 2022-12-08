@@ -6,6 +6,7 @@ type Message {
 }
 
 input CreateMessageInput {
+  roomId: ID!
   author: String!
   text: String!
 }
