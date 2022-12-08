@@ -2,7 +2,10 @@ import { useState } from "react";
 import { AsidePanel } from "../../components";
 import {
   ChatRoom,
+  CreateChatRoomInput,
+  CreateMessageInput,
   useCreateChatRoomMutation,
+  useCreateMessageMutation,
 } from "../../__generated__/operations-types";
 import ChatRoomsPanel from "./ChatRoomsPanel";
 import ChatWindow from "./ChatWindow";
@@ -19,14 +22,20 @@ const Dashboard = ({ chatRoomList }: Props) => {
 
   // Mutation
   const [createChatRoomMutation] = useCreateChatRoomMutation();
+  const [createMessageMutation] = useCreateMessageMutation();
 
-  const handleAddNewRoom = (title: string, description: string) => {
+  const handleAddNewRoom = (input: CreateChatRoomInput) => {
     createChatRoomMutation({
       variables: {
-        input: {
-          title,
-          description,
-        },
+        input,
+      },
+    });
+  };
+
+  const handleCreateMessage = (input: CreateMessageInput) => {
+    createMessageMutation({
+      variables: {
+        input,
       },
     });
   };
@@ -44,7 +53,10 @@ const Dashboard = ({ chatRoomList }: Props) => {
         />
       </AsidePanel>
       <main>
-        <ChatWindow chatRoom={chatRoomList[0]} />
+        <ChatWindow
+          chatRoom={chatRoomList[0]}
+          onCreateMessage={handleCreateMessage}
+        />
       </main>
       <AsidePanel
         isOpen={isRightPanelOpen}

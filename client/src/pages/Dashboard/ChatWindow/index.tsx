@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { Button } from "../../../components";
 import Input from "../../../components/Input";
-import { ChatRoom } from "../../../__generated__/operations-types";
+import {
+  ChatRoom,
+  CreateMessageInput,
+} from "../../../__generated__/operations-types";
 import ChatBox from "./ChatBox";
 
 interface Props {
   chatRoom?: ChatRoom;
+  onCreateMessage: (input: CreateMessageInput) => void;
 }
 
-const ChatWindow = ({ chatRoom }: Props) => {
+const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
   const [input, setInput] = useState("");
 
   const handleInputChange = (value: string) => {
@@ -16,12 +20,7 @@ const ChatWindow = ({ chatRoom }: Props) => {
   };
 
   const handleSendMessage = () => {
-    // __MockedChatBoxData__.push({
-    //   text: input,
-    //   author: "author",
-    //   date: new Date(),
-    // });
-
+    onCreateMessage({ author: "michal", text: input });
     setInput("");
   };
 

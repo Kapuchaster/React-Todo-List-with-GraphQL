@@ -46,5 +46,10 @@ export const resolvers: Resolvers = {
         messages: [],
       };
     },
+    createMessage: (_obj, args, _context, _info) => {
+      console.log("----", args);
+
+      return true;
+    },
   },
 };

@@ -1,16 +1,16 @@
 import { useContext } from "react";
 import { Button } from "../../../components";
 import { ModalContext } from "../../../HOC/WithModal";
-import { ChatRoom } from "../../../__generated__/operations-types";
+import {
+  ChatRoom,
+  CreateChatRoomInput,
+} from "../../../__generated__/operations-types";
 import CreateRoom from "../CreateRoom";
 
 import "./style.css";
 interface Props {
   chatRoomList?: ChatRoom[];
-  onAddChatRoom: (
-    title: ChatRoom["title"],
-    description: ChatRoom["description"]
-  ) => void;
+  onAddChatRoom: (input: CreateChatRoomInput) => void;
 }
 
 const ChatRoomsPanel = ({ chatRoomList = [], onAddChatRoom }: Props) => {
