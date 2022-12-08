@@ -7,7 +7,7 @@ import {
   Message,
   useMessageSubscription,
 } from "../../../__generated__/operations-types";
-import ChatBox from "./ChatBox";
+import ChatBox from "../../../components/ChatBox";
 
 interface Props {
   chatRoom?: ChatRoom;
