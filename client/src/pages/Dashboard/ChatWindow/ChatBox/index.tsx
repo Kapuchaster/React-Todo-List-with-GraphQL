@@ -1,5 +1,7 @@
+import { Message } from "../../../../__generated__/operations-types";
+
 interface Props {
-  messageDataList: { text: string; author: string; timestamp: string }[];
+  messageDataList: Message[];
 }
 
 const ChatBox = ({ messageDataList }: Props) => {
@@ -7,7 +9,7 @@ const ChatBox = ({ messageDataList }: Props) => {
     <div>
       {messageDataList.map((messageData) => {
         return (
-          <div>
+          <div key={messageData.id}>
             {messageData.text}
             {messageData.author}
           </div>

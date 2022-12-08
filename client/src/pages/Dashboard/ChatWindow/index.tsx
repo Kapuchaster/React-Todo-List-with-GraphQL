@@ -5,7 +5,7 @@ import { ChatRoom } from "../../../__generated__/operations-types";
 import ChatBox from "./ChatBox";
 
 interface Props {
-  chatRoom: ChatRoom;
+  chatRoom?: ChatRoom;
 }
 
 const ChatWindow = ({ chatRoom }: Props) => {
@@ -24,6 +24,10 @@ const ChatWindow = ({ chatRoom }: Props) => {
 
     setInput("");
   };
+
+  if (!chatRoom) {
+    return <h1>Select Room</h1>;
+  }
 
   return (
     <div>
