@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../../../components";
 import Input from "../../../components/Input";
 import {
   ChatRoom,
   CreateMessageInput,
+  Message,
+  useMessageSubscription,
 } from "../../../__generated__/operations-types";
 import ChatBox from "./ChatBox";
 
@@ -14,6 +16,18 @@ interface Props {
 
 const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
   const [input, setInput] = useState("");
+  const [messageList, setMessageList] = useState<Message[]>(
+    chatRoom?.messages || []
+  );
+
+  // Subscription
+  const { data: messageSubData } = useMessageSubscription();
+
+  useEffect(() => {
+    if (messageSubData) {
+      setMessageList((state) => [...state, messageSubData?.messageCreated]);
+    }
+  }, [messageSubData]);
 
   const handleInputChange = (value: string) => {
     setInput(value);
@@ -32,7 +46,7 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
     <div>
       <h1>ChatWindow</h1>
       <div>{chatRoom.title}</div>
-      <ChatBox messageDataList={chatRoom.messages} />
+      <ChatBox messageDataList={messageList} />
       <Input value={input} name="messageInput" onChange={handleInputChange} />
       <Button title=">" variant="primary" onClick={handleSendMessage} />
     </div>
