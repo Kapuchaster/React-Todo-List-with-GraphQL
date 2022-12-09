@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button } from "../../../components";
+import ChatBox from "../../../components/ChatBox";
 import Input from "../../../components/Input";
+import { SettingsContext } from "../../../HOC/WithSettings";
 import {
   ChatRoom,
   CreateMessageInput,
   Message,
   useMessageSubscription,
 } from "../../../__generated__/operations-types";
-import ChatBox from "../../../components/ChatBox";
 
 interface Props {
   chatRoom?: ChatRoom;
@@ -19,6 +20,8 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
   const [messageList, setMessageList] = useState<Message[]>(
     chatRoom?.messages || []
   );
+
+  const settingsContext = useContext(SettingsContext);
 
   // Subscription
   const { data: messageSubData } = useMessageSubscription();
@@ -41,7 +44,11 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
 
   const handleSendMessage = () => {
     if (chatRoom) {
-      onCreateMessage({ roomId: chatRoom.id, author: "michal", text: input });
+      onCreateMessage({
+        roomId: chatRoom.id,
+        author: settingsContext.username,
+        text: input,
+      });
     }
     setInput("");
   };
