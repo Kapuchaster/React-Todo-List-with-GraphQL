@@ -22,9 +22,15 @@ const CreateRoom = ({ onAddNewRoom }: Props) => {
 
   return (
     <div>
-      <Input name="title" value={newRoom.title} onChange={handleChangeInput} />
+      <Input
+        name="title"
+        placeholder="title"
+        value={newRoom.title}
+        onChange={handleChangeInput}
+      />
       <Input
         name="description"
+        placeholder="description"
         value={newRoom.description}
         onChange={handleChangeInput}
       />

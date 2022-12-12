@@ -57,10 +57,10 @@ const server = new ApolloServer({
 const startServer = async () => {
   await server.start();
 
+  app.use(cors());
+  app.use(bodyParser.json());
   app.use(
     "/",
-    cors<cors.CorsRequest>(),
-    bodyParser.json(),
     // expressMiddleware accepts the same arguments:
     // an Apollo Server instance and optional configuration options
     // TODO THROW ERROR when no token
