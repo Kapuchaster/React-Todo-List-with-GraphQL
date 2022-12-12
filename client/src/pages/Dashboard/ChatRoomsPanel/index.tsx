@@ -31,7 +31,7 @@ const ChatRoomsPanel = ({
   return (
     <div className="chatRoomPanel--container">
       <h1>ChatRoomsPanel</h1>
-      <ScrollBox>
+      <ScrollBox height="20rem">
         <>
           {chatRoomList.map((chatRoom) => (
             <RoomTile

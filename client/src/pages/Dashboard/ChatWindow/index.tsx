@@ -54,16 +54,25 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
   };
 
   if (!chatRoom) {
-    return <h1>Select Room</h1>;
+    return <h1>Select or create a Chat Room</h1>;
   }
 
   return (
-    <div>
-      <h1>ChatWindow</h1>
-      <div>{chatRoom.title}</div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-around",
+        height: "100vh",
+        width: "35rem",
+      }}
+    >
+      <h1>{chatRoom.title}</h1>
       <ChatBox messageDataList={messageList} />
-      <Input value={input} name="messageInput" onChange={handleInputChange} />
-      <Button title=">" variant="primary" onClick={handleSendMessage} />
+      <div>
+        <Input value={input} name="messageInput" onChange={handleInputChange} />
+        <Button title=">" variant="primary" onClick={handleSendMessage} />
+      </div>
     </div>
   );
 };
