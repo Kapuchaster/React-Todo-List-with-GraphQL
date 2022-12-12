@@ -59,8 +59,9 @@ const Dashboard = ({ chatRoomList }: Props) => {
       >
         <ChatRoomsPanel
           chatRoomList={chatRoomList}
+          selectedChatRoomId={settingContext.activeRoom?.id}
           onAddChatRoom={handleAddNewRoom}
-          onSelectRoom={handleSelectRoom}
+          onSelectChatRoom={handleSelectRoom}
         />
       </AsidePanel>
       <main>

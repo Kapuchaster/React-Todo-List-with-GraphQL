@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Button } from "../../../components";
+import { Button, RoomTile } from "../../../components";
 import { ModalContext } from "../../../HOC/WithModal";
 import {
   ChatRoom,
@@ -10,14 +10,16 @@ import CreateRoom from "../../../components/CreateRoom";
 import "./style.css";
 interface Props {
   chatRoomList?: ChatRoom[];
+  selectedChatRoomId?: string;
   onAddChatRoom: (input: CreateChatRoomInput) => void;
-  onSelectRoom: (roomId: string) => void;
+  onSelectChatRoom: (roomId: string) => void;
 }
 
 const ChatRoomsPanel = ({
   chatRoomList = [],
+  selectedChatRoomId,
   onAddChatRoom,
-  onSelectRoom,
+  onSelectChatRoom,
 }: Props) => {
   const modalContext = useContext(ModalContext);
 
@@ -30,12 +32,12 @@ const ChatRoomsPanel = ({
       <h1>ChatRoomsPanel</h1>
       <div>
         {chatRoomList.map((chatRoom) => (
-          <Button
+          <RoomTile
             key={chatRoom.id}
             title={chatRoom.title}
-            variant="secondary"
+            isActive={chatRoom.id === selectedChatRoomId}
             onClick={() => {
-              onSelectRoom(chatRoom.id);
+              onSelectChatRoom(chatRoom.id);
             }}
           />
         ))}

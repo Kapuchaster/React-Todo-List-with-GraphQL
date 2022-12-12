@@ -1,0 +1,18 @@
+.roomTile__container {
+  cursor: pointer;
+  padding: 1rem;
+  text-align: center;
+}
+
+.roomTile__container:hover {
+  background-color: yellowgreen;
+}
+
+.roomTile__container--isInactive {
+  background-color: rgb(233, 233, 233);
+}
+
+.roomTile__container--isActive {
+  color: white;
+  background-color: green;
+}
