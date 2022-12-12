@@ -10,7 +10,7 @@ interface Props {
 const ChatBox = ({ messageDataList }: Props) => {
   return (
     <div className="chatBox--container">
-      <ScrollBox height="20rem">
+      <ScrollBox>
         <>
           {messageDataList.map((messageData) => {
             return (

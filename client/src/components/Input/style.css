@@ -1,3 +1,11 @@
-.input--container {
+.input__container {
+  flex: 1;
 }
 
+.input__container--small {
+  height: 1,5rem;
+}
+
+.input__container--large {
+  height: 2rem;
+}

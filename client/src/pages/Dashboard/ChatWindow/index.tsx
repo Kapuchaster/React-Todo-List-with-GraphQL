@@ -68,9 +68,17 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
       }}
     >
       <h1>{chatRoom.title}</h1>
-      <ChatBox messageDataList={messageList} />
-      <div>
-        <Input value={input} name="messageInput" onChange={handleInputChange} />
+      <div style={{ height: "80vh" }}>
+        <ChatBox messageDataList={messageList} />
+      </div>
+      <div style={{ display: "flex" }}>
+        <Input
+          size="lg"
+          value={input}
+          name="messageInput"
+          onChange={handleInputChange}
+          onPressEnter={handleSendMessage}
+        />
         <Button title=">" variant="primary" onClick={handleSendMessage} />
       </div>
     </div>
