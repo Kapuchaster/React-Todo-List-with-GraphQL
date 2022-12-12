@@ -8,6 +8,7 @@ import {
 import CreateRoom from "../../../components/CreateRoom";
 
 import "./style.css";
+import ScrollBox from "../../../components/ScrollBox";
 interface Props {
   chatRoomList?: ChatRoom[];
   selectedChatRoomId?: string;
@@ -30,19 +31,21 @@ const ChatRoomsPanel = ({
   return (
     <div className="chatRoomPanel--container">
       <h1>ChatRoomsPanel</h1>
-      <div>
-        {chatRoomList.map((chatRoom) => (
-          <RoomTile
-            key={chatRoom.id}
-            title={chatRoom.title}
-            isActive={chatRoom.id === selectedChatRoomId}
-            onClick={() => {
-              onSelectChatRoom(chatRoom.id);
-            }}
-          />
-        ))}
-        <Button title="Add" variant="primary" onClick={openCreateModal} />
-      </div>
+      <ScrollBox>
+        <>
+          {chatRoomList.map((chatRoom) => (
+            <RoomTile
+              key={chatRoom.id}
+              title={chatRoom.title}
+              isActive={chatRoom.id === selectedChatRoomId}
+              onClick={() => {
+                onSelectChatRoom(chatRoom.id);
+              }}
+            />
+          ))}
+        </>
+      </ScrollBox>
+      <Button title="Add" variant="primary" onClick={openCreateModal} />
     </div>
   );
 };
