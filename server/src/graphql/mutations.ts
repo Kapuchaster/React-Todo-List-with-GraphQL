@@ -6,23 +6,21 @@ const mutations = (pubsub: PubSub): MutationResolvers => ({
   createChatRoom: (_obj, args, _context, _info) => {
     const { title, description } = args.input;
 
-    pubsub.publish("CHAT_ROOM_CREATED", {
-      chatRoomCreated: {
-        id: title,
-        title,
-        description,
-        messages: [],
-        participants: [],
-      },
-    });
-
-    return {
+    const newChatRoom = {
       id: title,
       title,
       description,
       messages: [],
       participants: [],
     };
+
+    chatRoomList.push(newChatRoom);
+
+    pubsub.publish("CHAT_ROOM_CREATED", {
+      chatRoomCreated: newChatRoom,
+    });
+
+    return newChatRoom;
   },
   joinChatRoom: (_obj, args, context, _info) => {
     //TODO author name will come with token in context
