@@ -3,7 +3,7 @@ import { loadSchemaSync } from "@graphql-tools/load";
 import { PubSub, withFilter } from "graphql-subscriptions";
 import path from "path";
 import chatRoomList from "./db/ChatRooms";
-import { ChatRoom, Message } from "./__generated__/resolvers-types";
+import { ChatRoom, Message, Resolvers } from "./__generated__/resolvers-types";
 
 export const typeDefs = loadSchemaSync(
   path.join(__dirname, "./schema/", "*.graphql"),
@@ -14,8 +14,7 @@ export const typeDefs = loadSchemaSync(
 
 const pubsub = new PubSub();
 
-// export const resolvers: Resolvers = {
-export const resolvers = {
+export const resolvers: Resolvers = {
   Subscription: {
     chatRoomCreated: {
       subscribe: () => {
@@ -25,17 +24,21 @@ export const resolvers = {
     },
     messageCreated: {
       subscribe: withFilter(
-        () => {
-          //TODO What's the type of asyncInterator?
-          return pubsub.asyncIterator<Message & { roomId: string }>(
-            "NEW_MESSAGE"
-          ) as any;
-        },
-        (payload, variables) => {
-          console.log("---", payload, variables);
-          return true;
+        () => pubsub.asyncIterator<Message & { roomId: string }>("NEW_MESSAGE"),
+        (payload, _variables, context) => {
+          const { roomId } = payload.messageCreated;
+          const { userId } = context.authorization;
+
+          const selectedRoomIndex = chatRoomList.findIndex(
+            (chatRoom) => chatRoom.id === roomId
+          );
+
+          // if the subscribing user is in participants of the given room returns true and emit event
+          return chatRoomList[selectedRoomIndex].participants.some(
+            (participant) => participant.id === userId
+          );
         }
-      ),
+      ) as any,
     },
   },
   Query: {
@@ -51,6 +54,7 @@ export const resolvers = {
           title,
           description,
           messages: [],
+          participants: [],
         },
       });
 
@@ -59,16 +63,35 @@ export const resolvers = {
         title,
         description,
         messages: [],
+        participants: [],
       };
+    },
+    joinChatRoom: (_obj, args, context, _info) => {
+      //TODO author name will come with token in context
+      const { author, roomIdToJoin, currentRoomId } = args.input;
+      const { userId } = context.authorization;
+
+      // Remove user from an old room
+      //
+
+      // Add user to the new room
+      const roomToJoinIndex = chatRoomList.findIndex(
+        (chatRoom) => chatRoom.id === roomIdToJoin
+      );
+      chatRoomList[roomToJoinIndex].participants.push({
+        id: userId,
+        name: author,
+      });
+      return chatRoomList[roomToJoinIndex];
     },
     createMessage: (_obj, args, _context, _info) => {
       const { roomId, author, text } = args.input;
       const timestamp = Date.now().toString();
-      const newMessage = {
+      const newMessage: Message = {
         id: timestamp,
         author,
         text,
-        timestamp: timestamp,
+        timestamp,
       };
 
       const roomIndex = chatRoomList.findIndex(

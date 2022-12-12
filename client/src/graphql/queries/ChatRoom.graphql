@@ -9,6 +9,10 @@ query GetChatRoomList {
       text
       timestamp
     }
+    participants {
+      id
+      name
+    }
   }
 }
 
@@ -22,6 +26,10 @@ subscription ChatRoom {
       author
       text
       timestamp
+    }
+    participants {
+      id
+      name
     }
   }
 }

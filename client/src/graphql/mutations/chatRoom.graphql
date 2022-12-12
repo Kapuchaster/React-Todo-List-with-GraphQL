@@ -5,3 +5,20 @@ mutation CreateChatRoom($input: CreateChatRoomInput) {
     description
   }
 }
+mutation JoinChatRoom($input: JoinChatRoomInput) {
+  joinChatRoom(input: $input) {
+    id
+    title
+    description
+    messages {
+      id
+      author
+      text
+      timestamp
+    }
+    participants {
+      id
+      name
+    }
+  }
+}

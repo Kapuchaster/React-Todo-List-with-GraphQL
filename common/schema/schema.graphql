@@ -3,8 +3,9 @@ type Query {
 }
 
 type Mutation {
-  createChatRoom(input: CreateChatRoomInput): ChatRoom!
-  createMessage(input: CreateMessageInput): Boolean!
+  createChatRoom(input: CreateChatRoomInput): ChatRoom
+  joinChatRoom(input: JoinChatRoomInput): ChatRoom
+  createMessage(input: CreateMessageInput): Boolean
 }
 
 type Subscription {

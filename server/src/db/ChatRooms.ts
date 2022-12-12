@@ -13,6 +13,7 @@ const chatRoomList: ChatRoom[] = [
         timestamp: Date.now().toString(),
       },
     ],
+    participants: [],
   },
   {
     id: "2",
@@ -26,6 +27,7 @@ const chatRoomList: ChatRoom[] = [
         timestamp: Date.now().toString(),
       },
     ],
+    participants: [],
   },
 ];
 

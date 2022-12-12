@@ -1,11 +1,23 @@
+type Author {
+  id: ID!
+  name: String!
+}
+
 type ChatRoom {
   id: String!
   title: String!
   description: String!
   messages: [Message!]!
+  participants: [Author!]!
 }
 
 input CreateChatRoomInput {
   title: String!
   description: String!
+}
+
+input JoinChatRoomInput {
+  author: String!
+  roomIdToJoin: ID!
+  currentRoomId: ID
 }

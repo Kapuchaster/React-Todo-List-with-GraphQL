@@ -1,14 +1,14 @@
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
+import { makeExecutableSchema } from "@graphql-tools/schema";
 import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
-import http from "http";
-import { resolvers, typeDefs } from "./graphql";
-import { makeExecutableSchema } from "@graphql-tools/schema";
 import { useServer } from "graphql-ws/lib/use/ws";
+import http from "http";
 import { WebSocketServer } from "ws";
+import { resolvers, typeDefs } from "./graphql";
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
@@ -23,7 +23,16 @@ const wsServer = new WebSocketServer({
 
 // Hand in the schema we just created and have the
 // WebSocketServer start listening.
-const serverCleanup = useServer({ schema }, wsServer);
+// TODO THROW ERROR when no token
+const serverCleanup = useServer(
+  {
+    schema,
+    context({ connectionParams }) {
+      return connectionParams.headers;
+    },
+  },
+  wsServer
+);
 
 const server = new ApolloServer({
   typeDefs,
@@ -54,8 +63,11 @@ const startServer = async () => {
     bodyParser.json(),
     // expressMiddleware accepts the same arguments:
     // an Apollo Server instance and optional configuration options
+    // TODO THROW ERROR when no token
     expressMiddleware(server, {
-      context: async ({ req }) => ({ token: req.headers.token }),
+      context: async ({ req }) => {
+        return { authorization: { userId: req.headers["user-id"] } };
+      },
     })
   );
 

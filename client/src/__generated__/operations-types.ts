@@ -15,11 +15,18 @@ export type Scalars = {
   Float: number;
 };
 
+export type Author = {
+  __typename?: 'Author';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+};
+
 export type ChatRoom = {
   __typename?: 'ChatRoom';
   description: Scalars['String'];
   id: Scalars['String'];
   messages: Array<Message>;
+  participants: Array<Author>;
   title: Scalars['String'];
 };
 
@@ -34,6 +41,12 @@ export type CreateMessageInput = {
   text: Scalars['String'];
 };
 
+export type JoinChatRoomInput = {
+  author: Scalars['String'];
+  currentRoomId?: InputMaybe<Scalars['ID']>;
+  roomIdToJoin: Scalars['ID'];
+};
+
 export type Message = {
   __typename?: 'Message';
   author: Scalars['String'];
@@ -44,8 +57,9 @@ export type Message = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createChatRoom: ChatRoom;
-  createMessage: Scalars['Boolean'];
+  createChatRoom?: Maybe<ChatRoom>;
+  createMessage?: Maybe<Scalars['Boolean']>;
+  joinChatRoom?: Maybe<ChatRoom>;
 };
 
 
@@ -56,6 +70,11 @@ export type MutationCreateChatRoomArgs = {
 
 export type MutationCreateMessageArgs = {
   input?: InputMaybe<CreateMessageInput>;
+};
+
+
+export type MutationJoinChatRoomArgs = {
+  input?: InputMaybe<JoinChatRoomInput>;
 };
 
 export type Query = {
@@ -74,24 +93,31 @@ export type CreateChatRoomMutationVariables = Exact<{
 }>;
 
 
-export type CreateChatRoomMutation = { __typename?: 'Mutation', createChatRoom: { __typename?: 'ChatRoom', id: string, title: string, description: string } };
+export type CreateChatRoomMutation = { __typename?: 'Mutation', createChatRoom?: { __typename?: 'ChatRoom', id: string, title: string, description: string } | null };
+
+export type JoinChatRoomMutationVariables = Exact<{
+  input?: InputMaybe<JoinChatRoomInput>;
+}>;
+
+
+export type JoinChatRoomMutation = { __typename?: 'Mutation', joinChatRoom?: { __typename?: 'ChatRoom', id: string, title: string, description: string, messages: Array<{ __typename?: 'Message', id: string, author: string, text: string, timestamp: string }>, participants: Array<{ __typename?: 'Author', id: string, name: string }> } | null };
 
 export type CreateMessageMutationVariables = Exact<{
   input?: InputMaybe<CreateMessageInput>;
 }>;
 
 
-export type CreateMessageMutation = { __typename?: 'Mutation', createMessage: boolean };
+export type CreateMessageMutation = { __typename?: 'Mutation', createMessage?: boolean | null };
 
 export type GetChatRoomListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetChatRoomListQuery = { __typename?: 'Query', chatRoomList: Array<{ __typename?: 'ChatRoom', id: string, title: string, description: string, messages: Array<{ __typename?: 'Message', id: string, author: string, text: string, timestamp: string }> }> };
+export type GetChatRoomListQuery = { __typename?: 'Query', chatRoomList: Array<{ __typename?: 'ChatRoom', id: string, title: string, description: string, messages: Array<{ __typename?: 'Message', id: string, author: string, text: string, timestamp: string }>, participants: Array<{ __typename?: 'Author', id: string, name: string }> }> };
 
 export type ChatRoomSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ChatRoomSubscription = { __typename?: 'Subscription', chatRoomCreated: { __typename?: 'ChatRoom', id: string, title: string, description: string, messages: Array<{ __typename?: 'Message', id: string, author: string, text: string, timestamp: string }> } };
+export type ChatRoomSubscription = { __typename?: 'Subscription', chatRoomCreated: { __typename?: 'ChatRoom', id: string, title: string, description: string, messages: Array<{ __typename?: 'Message', id: string, author: string, text: string, timestamp: string }>, participants: Array<{ __typename?: 'Author', id: string, name: string }> } };
 
 export type MessageSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -134,6 +160,51 @@ export function useCreateChatRoomMutation(baseOptions?: Apollo.MutationHookOptio
 export type CreateChatRoomMutationHookResult = ReturnType<typeof useCreateChatRoomMutation>;
 export type CreateChatRoomMutationResult = Apollo.MutationResult<CreateChatRoomMutation>;
 export type CreateChatRoomMutationOptions = Apollo.BaseMutationOptions<CreateChatRoomMutation, CreateChatRoomMutationVariables>;
+export const JoinChatRoomDocument = gql`
+    mutation JoinChatRoom($input: JoinChatRoomInput) {
+  joinChatRoom(input: $input) {
+    id
+    title
+    description
+    messages {
+      id
+      author
+      text
+      timestamp
+    }
+    participants {
+      id
+      name
+    }
+  }
+}
+    `;
+export type JoinChatRoomMutationFn = Apollo.MutationFunction<JoinChatRoomMutation, JoinChatRoomMutationVariables>;
+
+/**
+ * __useJoinChatRoomMutation__
+ *
+ * To run a mutation, you first call `useJoinChatRoomMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useJoinChatRoomMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [joinChatRoomMutation, { data, loading, error }] = useJoinChatRoomMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useJoinChatRoomMutation(baseOptions?: Apollo.MutationHookOptions<JoinChatRoomMutation, JoinChatRoomMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<JoinChatRoomMutation, JoinChatRoomMutationVariables>(JoinChatRoomDocument, options);
+      }
+export type JoinChatRoomMutationHookResult = ReturnType<typeof useJoinChatRoomMutation>;
+export type JoinChatRoomMutationResult = Apollo.MutationResult<JoinChatRoomMutation>;
+export type JoinChatRoomMutationOptions = Apollo.BaseMutationOptions<JoinChatRoomMutation, JoinChatRoomMutationVariables>;
 export const CreateMessageDocument = gql`
     mutation CreateMessage($input: CreateMessageInput) {
   createMessage(input: $input)
@@ -177,6 +248,10 @@ export const GetChatRoomListDocument = gql`
       text
       timestamp
     }
+    participants {
+      id
+      name
+    }
   }
 }
     `;
@@ -218,6 +293,10 @@ export const ChatRoomDocument = gql`
       author
       text
       timestamp
+    }
+    participants {
+      id
+      name
     }
   }
 }

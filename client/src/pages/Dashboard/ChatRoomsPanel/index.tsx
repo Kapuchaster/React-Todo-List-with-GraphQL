@@ -11,9 +11,14 @@ import "./style.css";
 interface Props {
   chatRoomList?: ChatRoom[];
   onAddChatRoom: (input: CreateChatRoomInput) => void;
+  onSelectRoom: (roomId: string) => void;
 }
 
-const ChatRoomsPanel = ({ chatRoomList = [], onAddChatRoom }: Props) => {
+const ChatRoomsPanel = ({
+  chatRoomList = [],
+  onAddChatRoom,
+  onSelectRoom,
+}: Props) => {
   const modalContext = useContext(ModalContext);
 
   const openCreateModal = () => {
@@ -29,7 +34,9 @@ const ChatRoomsPanel = ({ chatRoomList = [], onAddChatRoom }: Props) => {
             key={chatRoom.id}
             title={chatRoom.title}
             variant="secondary"
-            onClick={() => {}}
+            onClick={() => {
+              onSelectRoom(chatRoom.id);
+            }}
           />
         ))}
         <Button title="Add" variant="primary" onClick={openCreateModal} />

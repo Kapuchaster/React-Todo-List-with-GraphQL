@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { AsidePanel } from "../../components";
+import { SettingsContext } from "../../HOC/WithSettings";
 import {
   ChatRoom,
   CreateChatRoomInput,
   CreateMessageInput,
+  JoinChatRoomInput,
   useCreateChatRoomMutation,
   useCreateMessageMutation,
+  useJoinChatRoomMutation,
 } from "../../__generated__/operations-types";
 import ChatRoomsPanel from "./ChatRoomsPanel";
 import ChatWindow from "./ChatWindow";
@@ -21,24 +24,30 @@ const Dashboard = ({ chatRoomList }: Props) => {
   const [isLeftPanelOpen, setLeftPanel] = useState(true);
   const [isRightPanelOpen, setRightPanel] = useState(true);
 
+  const settingContext = useContext(SettingsContext);
+
   // Mutation
   const [createChatRoomMutation] = useCreateChatRoomMutation();
   const [createMessageMutation] = useCreateMessageMutation();
+  const [joinChatRoomMutation] = useJoinChatRoomMutation();
 
   const handleAddNewRoom = (input: CreateChatRoomInput) => {
-    createChatRoomMutation({
-      variables: {
-        input,
-      },
-    });
+    createChatRoomMutation({ variables: { input } });
   };
 
   const handleCreateMessage = (input: CreateMessageInput) => {
-    createMessageMutation({
-      variables: {
-        input,
-      },
-    });
+    createMessageMutation({ variables: { input } });
+  };
+
+  const handleSelectRoom = async (roomIdToJoin: string) => {
+    const input: JoinChatRoomInput = {
+      roomIdToJoin,
+      author: settingContext.username,
+      currentRoomId: settingContext?.activeRoom?.id,
+    };
+    const { data } = await joinChatRoomMutation({ variables: { input } });
+
+    settingContext.setActiveRoom(data?.joinChatRoom || undefined);
   };
 
   return (
@@ -51,11 +60,12 @@ const Dashboard = ({ chatRoomList }: Props) => {
         <ChatRoomsPanel
           chatRoomList={chatRoomList}
           onAddChatRoom={handleAddNewRoom}
+          onSelectRoom={handleSelectRoom}
         />
       </AsidePanel>
       <main>
         <ChatWindow
-          chatRoom={chatRoomList[0]}
+          chatRoom={settingContext.activeRoom}
           onCreateMessage={handleCreateMessage}
         />
       </main>

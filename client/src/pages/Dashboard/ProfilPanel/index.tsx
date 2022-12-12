@@ -5,11 +5,11 @@ import { SettingsContext } from "../../../HOC/WithSettings";
 import "./style.css";
 
 const ProfilPanel = () => {
-  const modalContext = useContext(SettingsContext);
+  const settingsContext = useContext(SettingsContext);
 
   //TODO: use react debouncing
   const handleInputChange = (value: string) => {
-    modalContext.setUsername(value);
+    settingsContext.setUsername(value);
   };
 
   return (
@@ -17,7 +17,7 @@ const ProfilPanel = () => {
       <h1>Profile</h1>
       <div>username:</div>
       <Input
-        value={modalContext.username}
+        value={settingsContext.username}
         name="username"
         onChange={handleInputChange}
       />

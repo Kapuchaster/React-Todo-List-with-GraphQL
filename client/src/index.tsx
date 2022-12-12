@@ -18,13 +18,22 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
+//TODO: this should be a port of auth
+const userId = Date.now().toString();
+
 const httpLink = new HttpLink({
   uri: "http://localhost:4000",
+  headers: { "user-id": userId },
 });
 
 const wsLink = new GraphQLWsLink(
   createClient({
     url: "ws://localhost:4000/graphql",
+    connectionParams: {
+      headers: {
+        authorization: { userId },
+      },
+    },
   })
 );
 
