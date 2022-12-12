@@ -30,7 +30,17 @@ const mutations = (pubsub: PubSub): MutationResolvers => ({
     const { userId } = context.authorization;
 
     // Remove user from an old room
-    //
+    if (currentRoomId) {
+      const roomToLeaveIndex = chatRoomList.findIndex(
+        (chatRoom) => chatRoom.id === currentRoomId
+      );
+
+      const userIndexToRemove = chatRoomList[
+        roomToLeaveIndex
+      ].participants.findIndex((participant) => participant.id === userId);
+
+      chatRoomList[roomToLeaveIndex].participants.splice(userIndexToRemove, 1);
+    }
 
     // Add user to the new room
     const roomToJoinIndex = chatRoomList.findIndex(
@@ -40,6 +50,7 @@ const mutations = (pubsub: PubSub): MutationResolvers => ({
       id: userId,
       name: author,
     });
+
     return chatRoomList[roomToJoinIndex];
   },
   createMessage: (_obj, args, _context, _info) => {
