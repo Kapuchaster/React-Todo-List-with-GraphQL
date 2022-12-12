@@ -1,3 +1,5 @@
+import { DetailedHTMLProps, InputHTMLAttributes } from "react";
+
 import "./style.css";
 
 interface Props {
@@ -5,12 +7,22 @@ interface Props {
   name: string;
   placeholder?: string;
   onChange: (value: string, name: string) => void;
+  onPressEnter?: () => void;
 }
 
-const Input = ({ value, name, placeholder, onChange }: Props) => {
+const Input = ({ value, name, placeholder, onChange, onPressEnter }: Props) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     onChange(value, name);
+  };
+
+  const handleEnterKey = (
+    event: DetailedHTMLProps<
+      InputHTMLAttributes<HTMLInputElement>,
+      HTMLInputElement
+    >
+  ) => {
+    event.key === "Enter" && onPressEnter?.();
   };
 
   return (
@@ -20,6 +32,7 @@ const Input = ({ value, name, placeholder, onChange }: Props) => {
       name={name}
       placeholder={placeholder}
       onChange={handleInputChange}
+      onKeyUp={handleEnterKey}
     />
   );
 };
