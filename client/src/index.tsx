@@ -11,9 +11,10 @@ import { createClient } from "graphql-ws";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import userId from "./services/auth";
+
+import "./index.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
