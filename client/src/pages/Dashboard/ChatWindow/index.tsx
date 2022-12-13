@@ -46,7 +46,7 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
     if (chatRoom) {
       onCreateMessage({
         roomId: chatRoom.id,
-        author: settingsContext.username,
+        authorName: settingsContext.username,
         text: input,
       });
     }

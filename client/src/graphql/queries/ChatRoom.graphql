@@ -5,7 +5,7 @@ query GetChatRoomList {
     description
     messages {
       id
-      author
+      authorName
       text
       timestamp
     }
@@ -23,7 +23,7 @@ subscription ChatRoom {
     description
     messages {
       id
-      author
+      authorName
       text
       timestamp
     }

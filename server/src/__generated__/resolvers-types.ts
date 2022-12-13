@@ -34,20 +34,20 @@ export type CreateChatRoomInput = {
 };
 
 export type CreateMessageInput = {
-  author: Scalars['String'];
+  authorName: Scalars['String'];
   roomId: Scalars['ID'];
   text: Scalars['String'];
 };
 
 export type JoinChatRoomInput = {
-  author: Scalars['String'];
+  authorName: Scalars['String'];
   currentRoomId?: InputMaybe<Scalars['ID']>;
   roomIdToJoin: Scalars['ID'];
 };
 
 export type Message = {
   __typename?: 'Message';
-  author: Scalars['String'];
+  authorName: Scalars['String'];
   id: Scalars['String'];
   text: Scalars['String'];
   timestamp: Scalars['String'];
@@ -201,7 +201,7 @@ export type ChatRoomResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type MessageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Message'] = ResolversParentTypes['Message']> = {
-  author?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  authorName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   timestamp?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

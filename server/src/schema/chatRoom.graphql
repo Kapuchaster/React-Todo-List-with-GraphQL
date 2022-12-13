@@ -17,7 +17,7 @@ input CreateChatRoomInput {
 }
 
 input JoinChatRoomInput {
-  author: String!
+  authorName: String!
   roomIdToJoin: ID!
   currentRoomId: ID
 }

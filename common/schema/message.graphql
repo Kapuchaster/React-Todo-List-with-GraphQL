@@ -1,12 +1,12 @@
 type Message {
   id: String!
-  author: String!
+  authorName: String!
   text: String!
   timestamp: String!
 }
 
 input CreateMessageInput {
   roomId: ID!
-  author: String!
+  authorName: String!
   text: String!
 }

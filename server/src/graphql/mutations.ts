@@ -24,7 +24,7 @@ const mutations = (pubsub: PubSub): MutationResolvers => ({
   },
   joinChatRoom: (_obj, args, context, _info) => {
     //TODO author name will come with token in context
-    const { author, roomIdToJoin, currentRoomId } = args.input;
+    const { authorName, roomIdToJoin, currentRoomId } = args.input;
     const { userId } = context.authorization;
 
     // Remove user from an old room
@@ -46,17 +46,17 @@ const mutations = (pubsub: PubSub): MutationResolvers => ({
     );
     chatRoomList[roomToJoinIndex].participants.push({
       id: userId,
-      name: author,
+      name: authorName,
     });
 
     return chatRoomList[roomToJoinIndex];
   },
   createMessage: (_obj, args, _context, _info) => {
-    const { roomId, author, text } = args.input;
+    const { roomId, authorName, text } = args.input;
     const timestamp = Date.now().toString();
     const newMessage: Message = {
       id: timestamp,
-      author,
+      authorName,
       text,
       timestamp,
     };

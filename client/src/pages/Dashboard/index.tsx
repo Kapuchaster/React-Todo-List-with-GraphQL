@@ -42,7 +42,7 @@ const Dashboard = ({ chatRoomList }: Props) => {
   const handleSelectRoom = async (roomIdToJoin: string) => {
     const input: JoinChatRoomInput = {
       roomIdToJoin,
-      author: settingContext.username,
+      authorName: settingContext.username,
       currentRoomId: settingContext?.activeRoom?.id,
     };
     const { data } = await joinChatRoomMutation({ variables: { input } });

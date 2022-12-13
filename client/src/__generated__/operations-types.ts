@@ -36,20 +36,20 @@ export type CreateChatRoomInput = {
 };
 
 export type CreateMessageInput = {
-  author: Scalars['String'];
+  authorName: Scalars['String'];
   roomId: Scalars['ID'];
   text: Scalars['String'];
 };
 
 export type JoinChatRoomInput = {
-  author: Scalars['String'];
+  authorName: Scalars['String'];
   currentRoomId?: InputMaybe<Scalars['ID']>;
   roomIdToJoin: Scalars['ID'];
 };
 
 export type Message = {
   __typename?: 'Message';
-  author: Scalars['String'];
+  authorName: Scalars['String'];
   id: Scalars['String'];
   text: Scalars['String'];
   timestamp: Scalars['String'];
@@ -100,7 +100,7 @@ export type JoinChatRoomMutationVariables = Exact<{
 }>;
 
 
-export type JoinChatRoomMutation = { __typename?: 'Mutation', joinChatRoom?: { __typename?: 'ChatRoom', id: string, title: string, description: string, messages: Array<{ __typename?: 'Message', id: string, author: string, text: string, timestamp: string }>, participants: Array<{ __typename?: 'Author', id: string, name: string }> } | null };
+export type JoinChatRoomMutation = { __typename?: 'Mutation', joinChatRoom?: { __typename?: 'ChatRoom', id: string, title: string, description: string, messages: Array<{ __typename?: 'Message', id: string, authorName: string, text: string, timestamp: string }>, participants: Array<{ __typename?: 'Author', id: string, name: string }> } | null };
 
 export type CreateMessageMutationVariables = Exact<{
   input?: InputMaybe<CreateMessageInput>;
@@ -112,17 +112,17 @@ export type CreateMessageMutation = { __typename?: 'Mutation', createMessage?: b
 export type GetChatRoomListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetChatRoomListQuery = { __typename?: 'Query', chatRoomList: Array<{ __typename?: 'ChatRoom', id: string, title: string, description: string, messages: Array<{ __typename?: 'Message', id: string, author: string, text: string, timestamp: string }>, participants: Array<{ __typename?: 'Author', id: string, name: string }> }> };
+export type GetChatRoomListQuery = { __typename?: 'Query', chatRoomList: Array<{ __typename?: 'ChatRoom', id: string, title: string, description: string, messages: Array<{ __typename?: 'Message', id: string, authorName: string, text: string, timestamp: string }>, participants: Array<{ __typename?: 'Author', id: string, name: string }> }> };
 
 export type ChatRoomSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ChatRoomSubscription = { __typename?: 'Subscription', chatRoomCreated: { __typename?: 'ChatRoom', id: string, title: string, description: string, messages: Array<{ __typename?: 'Message', id: string, author: string, text: string, timestamp: string }>, participants: Array<{ __typename?: 'Author', id: string, name: string }> } };
+export type ChatRoomSubscription = { __typename?: 'Subscription', chatRoomCreated: { __typename?: 'ChatRoom', id: string, title: string, description: string, messages: Array<{ __typename?: 'Message', id: string, authorName: string, text: string, timestamp: string }>, participants: Array<{ __typename?: 'Author', id: string, name: string }> } };
 
 export type MessageSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MessageSubscription = { __typename?: 'Subscription', messageCreated: { __typename?: 'Message', id: string, author: string, text: string, timestamp: string } };
+export type MessageSubscription = { __typename?: 'Subscription', messageCreated: { __typename?: 'Message', id: string, authorName: string, text: string, timestamp: string } };
 
 
 export const CreateChatRoomDocument = gql`
@@ -168,7 +168,7 @@ export const JoinChatRoomDocument = gql`
     description
     messages {
       id
-      author
+      authorName
       text
       timestamp
     }
@@ -244,7 +244,7 @@ export const GetChatRoomListDocument = gql`
     description
     messages {
       id
-      author
+      authorName
       text
       timestamp
     }
@@ -290,7 +290,7 @@ export const ChatRoomDocument = gql`
     description
     messages {
       id
-      author
+      authorName
       text
       timestamp
     }
@@ -327,7 +327,7 @@ export const MessageDocument = gql`
     subscription Message {
   messageCreated {
     id
-    author
+    authorName
     text
     timestamp
   }

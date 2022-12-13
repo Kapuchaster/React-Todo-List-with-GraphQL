@@ -16,7 +16,7 @@ const ChatBox = ({ messageDataList }: Props) => {
             return (
               <div key={messageData.id} className="chatBox__message--container">
                 <div className="chatBox__message--info">
-                  <div>{messageData.author}</div>
+                  <div>{messageData.authorName}</div>
                   <div>{messageData.timestamp}</div>
                 </div>
                 <div className="chatBox__message">{messageData.text}</div>
