@@ -1,6 +1,6 @@
 # Video Chat
 This is a MVP real-time video chat application powered by React and Apollo with Graphql onboard.
-The application will be developed and new features and code refactoring will be added over time.
+The application will be developed and new features like video streaming via WebRTC will be added over time.
 
 The real time communication is powered by WebSocket via the graphql-ws library.
 
