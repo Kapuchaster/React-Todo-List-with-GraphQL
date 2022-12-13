@@ -9,6 +9,9 @@
     "client",
     "server"
   ],
+  "scripts": {
+    "start": "yarn workspace @video-chat/server start & yarn workspace @video-chat/client start"
+  },
   "author": "Michal Kapuscinski",
   "license": "MIT"
 }
