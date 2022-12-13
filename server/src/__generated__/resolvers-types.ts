@@ -34,6 +34,7 @@ export type CreateChatRoomInput = {
 };
 
 export type CreateMessageInput = {
+  authorId: Scalars['String'];
   authorName: Scalars['String'];
   roomId: Scalars['ID'];
   text: Scalars['String'];
@@ -47,7 +48,7 @@ export type JoinChatRoomInput = {
 
 export type Message = {
   __typename?: 'Message';
-  authorName: Scalars['String'];
+  author: Author;
   id: Scalars['String'];
   text: Scalars['String'];
   timestamp: Scalars['String'];
@@ -201,7 +202,7 @@ export type ChatRoomResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type MessageResolvers<ContextType = any, ParentType extends ResolversParentTypes['Message'] = ResolversParentTypes['Message']> = {
-  authorName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   timestamp?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

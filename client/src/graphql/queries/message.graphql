@@ -1,7 +1,10 @@
 subscription Message {
   messageCreated {
     id
-    authorName
+    author {
+      id
+      name
+    }
     text
     timestamp
   }

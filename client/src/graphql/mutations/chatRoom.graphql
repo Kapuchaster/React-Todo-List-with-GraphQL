@@ -12,7 +12,10 @@ mutation JoinChatRoom($input: JoinChatRoomInput) {
     description
     messages {
       id
-      authorName
+      author {
+        id
+        name
+      }
       text
       timestamp
     }

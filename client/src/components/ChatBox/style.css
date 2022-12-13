@@ -5,7 +5,10 @@
 }
 
 .chatBox__message--container {
-  padding: 0.5rem 0;
+  width: 90%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  background-color: rgb(255, 255, 255);
 }
 .chatBox__message--info {
   display: flex;
@@ -14,7 +17,12 @@
   color: gray;
 }
 
-.chatBox__message-text {
-  font-size: 1.4rem;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+.chatBox__message--left {
+  border-radius: 0 1rem 1rem 0;
+}
+
+.chatBox__message--right {
+  margin-left: auto;
+  background-color: greenyellow;
+  border-radius: 1rem 0 0 1rem;
 }

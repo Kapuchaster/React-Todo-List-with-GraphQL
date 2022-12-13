@@ -3,6 +3,7 @@ import { Button } from "../../../components";
 import ChatBox from "../../../components/ChatBox";
 import Input from "../../../components/Input";
 import { SettingsContext } from "../../../HOC/WithSettings";
+import TEMP_USER_ID from "../../../services/auth";
 import {
   ChatRoom,
   CreateMessageInput,
@@ -46,6 +47,7 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
     if (chatRoom) {
       onCreateMessage({
         roomId: chatRoom.id,
+        authorId: TEMP_USER_ID,
         authorName: settingsContext.username,
         text: input,
       });
@@ -69,7 +71,7 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
     >
       <h1>{chatRoom.title}</h1>
       <div style={{ height: "80vh" }}>
-        <ChatBox messageDataList={messageList} />
+        <ChatBox messageDataList={messageList} userId={TEMP_USER_ID} />
       </div>
       <div style={{ display: "flex" }}>
         <Input

@@ -8,7 +8,7 @@ const chatRoomList: ChatRoom[] = [
     messages: [
       {
         id: "1",
-        authorName: "Bot",
+        author: { id: "Bot_1", name: "Bot" },
         text: "welcome in Town of cats",
         timestamp: Date.now().toString(),
       },
@@ -22,7 +22,7 @@ const chatRoomList: ChatRoom[] = [
     messages: [
       {
         id: "1",
-        authorName: "Bot",
+        author: { id: "Bot_1", name: "Bot" },
         text: "welcome in City of Glass",
         timestamp: Date.now().toString(),
       },

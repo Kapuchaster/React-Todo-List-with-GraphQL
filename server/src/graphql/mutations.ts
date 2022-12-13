@@ -52,11 +52,11 @@ const mutations = (pubsub: PubSub): MutationResolvers => ({
     return chatRoomList[roomToJoinIndex];
   },
   createMessage: (_obj, args, _context, _info) => {
-    const { roomId, authorName, text } = args.input;
+    const { roomId, authorId, authorName, text } = args.input;
     const timestamp = Date.now().toString();
     const newMessage: Message = {
       id: timestamp,
-      authorName,
+      author: { id: authorId, name: authorName },
       text,
       timestamp,
     };
@@ -64,6 +64,7 @@ const mutations = (pubsub: PubSub): MutationResolvers => ({
     const roomIndex = chatRoomList.findIndex(
       (chatRoom) => chatRoom.id === roomId
     );
+
     chatRoomList[roomIndex].messages.push(newMessage);
 
     pubsub.publish("NEW_MESSAGE", {

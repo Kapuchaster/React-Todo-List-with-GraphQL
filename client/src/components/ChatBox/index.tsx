@@ -3,24 +3,45 @@ import ScrollBox from "../ScrollBox";
 
 import "./style.css";
 
+const MessageTile = ({
+  text,
+  author,
+  timestamp,
+  isMine,
+}: Message & { isMine: boolean }) => {
+  const isRight = isMine ? "chatBox__message--right" : "chatBox__message--left";
+
+  return (
+    <div className={`chatBox__message--container ${isRight}`}>
+      <div className="chatBox__message--info">
+        <div>{author.name}</div>
+        <div>{timestamp}</div>
+      </div>
+      <div className="chatBox__message">{text}</div>
+    </div>
+  );
+};
+
 interface Props {
+  userId: string;
   messageDataList: Message[];
 }
 
-const ChatBox = ({ messageDataList }: Props) => {
+const ChatBox = ({ userId, messageDataList }: Props) => {
   return (
     <div className="chatBox--container">
       <ScrollBox>
         <>
-          {messageDataList.map((messageData) => {
+          {messageDataList.map(({ id, text, author, timestamp }) => {
             return (
-              <div key={messageData.id} className="chatBox__message--container">
-                <div className="chatBox__message--info">
-                  <div>{messageData.authorName}</div>
-                  <div>{messageData.timestamp}</div>
-                </div>
-                <div className="chatBox__message">{messageData.text}</div>
-              </div>
+              <MessageTile
+                key={id}
+                id={id}
+                text={text}
+                author={author}
+                timestamp={timestamp}
+                isMine={userId === author.id}
+              />
             );
           })}
         </>

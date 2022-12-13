@@ -13,13 +13,11 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+import userId from "./services/auth";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-
-//TODO: this should be a port of auth
-const userId = Date.now().toString();
 
 const httpLink = new HttpLink({
   uri: "http://localhost:4000",
