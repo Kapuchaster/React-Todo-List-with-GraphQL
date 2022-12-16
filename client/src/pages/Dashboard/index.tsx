@@ -14,7 +14,7 @@ import ChatRoomsPanel from "./ChatRoomsPanel";
 import ChatWindow from "./ChatWindow";
 import ProfilPanel from "./ProfilPanel";
 
-import "./style.scss";
+import "./style.css";
 
 interface Props {
   chatRoomList: ChatRoom[];

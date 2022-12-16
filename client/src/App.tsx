@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { WithModalContext } from "./HOC/WithModal";
 import { WithSettingsContext } from "./HOC/WithSettings";
+import { WithThemeContext } from "./HOC/WithTheme";
 import Dashboard from "./pages/Dashboard";
 
 import {
@@ -31,9 +32,11 @@ function App() {
 
   return (
     <WithSettingsContext>
-      <WithModalContext>
-        <Dashboard chatRoomList={chatRoomList} />
-      </WithModalContext>
+      <WithThemeContext>
+        <WithModalContext>
+          <Dashboard chatRoomList={chatRoomList} />
+        </WithModalContext>
+      </WithThemeContext>
     </WithSettingsContext>
   );
 }
