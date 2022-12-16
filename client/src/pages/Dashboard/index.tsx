@@ -16,7 +16,7 @@ import ProfilPanel from "./ProfilPanel";
 
 import "./style.css";
 
-interface Props {
+export interface Props {
   chatRoomList: ChatRoom[];
 }
 

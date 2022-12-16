@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Modal from "react-modal";
 
 const customStyles = {
@@ -11,14 +12,16 @@ const customStyles = {
   },
 };
 
-Modal.setAppElement("#root");
-
 interface Props {
   content?: JSX.Element;
   onClose: () => void;
 }
 
 const ModalComponent = ({ content, onClose }: Props) => {
+  useEffect(() => {
+    Modal.setAppElement("#root");
+  }, []);
+
   const closeModal = () => {
     onClose();
   };
