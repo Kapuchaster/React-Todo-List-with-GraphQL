@@ -1,29 +1,95 @@
-.aside--container {
+@keyframes revealFromLeft {
+  0% {
+    left: -20rem;
+  }
+  100% {
+    left: 0rem;
+  }
+}
+
+@keyframes hideToLeft {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -20rem;
+  }
+}
+
+@keyframes revealFromRight {
+  0% {
+    right: -20rem;
+  }
+  100% {
+    right: 0;
+  }
+}
+
+@keyframes hideToRight {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: -20rem;
+  }
+}
+
+.aside__container {
   position: absolute;
 }
 
-.aside__content--container {
+.aside__content {
+  position: relative;
   height: 100vh;
   width: 20rem;
-  background-color: azure;
+  background-color: var(--color-primary);
+  -webkit-box-shadow: 0px 0px 30px -5px black;
+  -moz-box-shadow: 0px 0px 30px -5px black;
+  box-shadow: 0px 0px 30px -5px black;
 }
 
-.aside--left {
+.aside__left {
   top: 0;
   left: 0;
 }
 
-.aside--right {
+.aside__left--active {
+  left: 0;
+  animation-name: revealFromLeft;
+  animation-duration: 0.2s;
+}
+
+.aside__left--inActive {
+  left: -20rem;
+  animation-name: hideToLeft;
+  animation-duration: 0.2s;
+}
+
+.aside__right {
   top: 0;
   right: 0;
+}
+
+.aside__right--active {
+  right: 0;
+  animation-name: revealFromRight;
+  animation-duration: 0.2s;
+}
+
+.aside__right--inActive {
+  right: -20rem;
+  animation-name: hideToRight;
+  animation-duration: 0.2s;
 }
 
 .aside__button--left {
   position: absolute;
   left: 0;
+  z-index: 2;
 }
 
 .aside__button--right {
   position: absolute;
   right: 0;
+  z-index: 2;
 }

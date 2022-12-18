@@ -23,9 +23,9 @@ const ProfilPanel = () => {
   };
 
   return (
-    <div className="profilPanel--container">
+    <div className="profilPanel">
       <h1>Profile</h1>
-      <div>username:</div>
+      <p>username:</p>
       <Input
         value={settingsContext.username}
         name="username"

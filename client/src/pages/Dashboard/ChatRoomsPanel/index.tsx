@@ -29,7 +29,7 @@ const ChatRoomsPanel = ({
   };
 
   return (
-    <div className="chatRoomPanel--container">
+    <div className="chatRoomPanel">
       <h1>ChatRoomsPanel</h1>
       <ScrollBox>
         <>

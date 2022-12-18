@@ -10,6 +10,8 @@ import {
   useGetChatRoomListLazyQuery,
 } from "./__generated__/operations-types";
 
+import "./theme/colors.css";
+
 function App() {
   const [chatRoomList, setChatRoomList] = useState<ChatRoom[]>([]);
 

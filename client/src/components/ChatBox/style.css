@@ -1,20 +1,25 @@
 .chatBox--container {
   height: 80vh;
   padding: 1rem;
-  background-color: aliceblue;
+  background-color: var(--color-white);
+}
+
+.chatBox__message {
+  color: var(--font-color);
 }
 
 .chatBox__message--container {
   width: 90%;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--color-primary);
 }
+
 .chatBox__message--info {
   display: flex;
   justify-content: space-between;
   font-size: 0.8rem;
-  color: gray;
+  color: rgb(189, 169, 255);
 }
 
 .chatBox__message--left {

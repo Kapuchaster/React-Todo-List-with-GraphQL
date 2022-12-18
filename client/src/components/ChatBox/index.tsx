@@ -19,7 +19,7 @@ const MessageTile = ({
         <div>{author.name}</div>
         <div>{formattedTime}</div>
       </div>
-      <div className="chatBox__message">{text}</div>
+      <p className="chatBox__message">{text}</p>
     </div>
   );
 };

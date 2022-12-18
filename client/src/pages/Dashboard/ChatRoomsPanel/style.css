@@ -1,3 +1,7 @@
-.chatRoomPanel--container {
+.chatRoomPanel {
   padding-top: 3rem;
+}
+
+.chatRoomPanel__header {
+  color: var(--font-color);
 }
