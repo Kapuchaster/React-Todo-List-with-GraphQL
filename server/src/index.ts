@@ -7,6 +7,7 @@ import cors from "cors";
 import express from "express";
 import { useServer } from "graphql-ws/lib/use/ws";
 import http from "http";
+import path from "path";
 import { WebSocketServer } from "ws";
 import { resolvers, typeDefs } from "./graphql";
 
@@ -59,13 +60,16 @@ const startServer = async () => {
 
   app.use(cors());
   app.use(bodyParser.json());
+  app.use(express.static(path.join(__dirname, "../../../client/build/")));
   app.use(
     "/",
     // expressMiddleware accepts the same arguments:
     // an Apollo Server instance and optional configuration options
     // TODO THROW ERROR when no token
     expressMiddleware(server, {
-      context: async ({ req }) => {
+      context: async ({ req, res }) => {
+        res.sendFile(path.join(__dirname, "../../../client/build/index.html"));
+
         return { authorization: { userId: req.headers["user-id"] } };
       },
     })
