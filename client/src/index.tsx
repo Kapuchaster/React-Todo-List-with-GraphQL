@@ -21,13 +21,13 @@ const root = ReactDOM.createRoot(
 );
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:4000",
+  uri: `http://${process.env.ip}/`,
   headers: { "user-id": userId },
 });
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: "ws://localhost:4000/graphql",
+    url: `ws://${process.env.ip}/graphql`,
     connectionParams: {
       headers: {
         authorization: { userId },
@@ -54,7 +54,7 @@ const splitLink = split(
 );
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/",
+  uri: "http://188.123.197.196:80/",
   link: splitLink,
   cache: new InMemoryCache(),
 });
