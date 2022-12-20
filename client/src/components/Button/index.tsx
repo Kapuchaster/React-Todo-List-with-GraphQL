@@ -8,7 +8,6 @@ interface Props {
 }
 
 const Button = ({ title, variant, size = "md", onClick }: Props) => {
-  
   return (
     <button className="button--container" onClick={onClick}>
       {title}

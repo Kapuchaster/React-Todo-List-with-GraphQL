@@ -10,10 +10,9 @@ interface Props {
 
 const AsidePanel = ({ isOpen, side, children, onIsOpenChange }: Props) => {
   const isActive = isOpen ? "active" : "inActive";
-  const asideClassName = `aside__container aside__${side}`;
 
   return (
-    <aside className={asideClassName}>
+    <div className={`aside__container aside__container--${side}`}>
       <button
         className={`aside__button--${side}`}
         onClick={() => {
@@ -22,8 +21,13 @@ const AsidePanel = ({ isOpen, side, children, onIsOpenChange }: Props) => {
       >
         open/close
       </button>
-      <div className={`aside__content aside__${side}--${isActive}`}>{children}</div>
-    </aside>
+      <aside
+        style={{ position: "absolute" }}
+        className={`aside__content aside__${side}--${isActive}`}
+      >
+        {children}
+      </aside>
+    </div>
   );
 };
 
