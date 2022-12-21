@@ -10,7 +10,8 @@
     "server"
   ],
   "scripts": {
-    "start": "yarn workspace @video-chat/server start & yarn workspace @video-chat/client start"
+    "start": "yarn workspace @video-chat/server start & yarn workspace @video-chat/client start",
+    "build": "TODO"
   },
   "author": "Michal Kapuscinski",
   "license": "MIT"
