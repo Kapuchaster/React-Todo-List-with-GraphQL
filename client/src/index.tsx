@@ -21,13 +21,13 @@ const root = ReactDOM.createRoot(
 );
 
 const httpLink = new HttpLink({
-  uri: `http://${process.env.ip}/`,
+  uri: `http://${process.env.REACT_APP_IP}/`,
   headers: { "user-id": userId },
 });
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: `ws://${process.env.ip}/graphql`,
+    url: `ws://${process.env.REACT_APP_IP}/graphql`,
     connectionParams: {
       headers: {
         authorization: { userId },
