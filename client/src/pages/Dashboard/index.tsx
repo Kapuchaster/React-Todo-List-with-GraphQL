@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useReducer } from "react";
 import { AsidePanel } from "../../components";
 import { SettingsContext } from "../../HOC/WithSettings";
 import useDetectMobile from "../../hooks/useDetectMobile";
@@ -13,6 +13,10 @@ import {
 } from "../../__generated__/operations-types";
 import ChatRoomsPanel from "./ChatRoomsPanel";
 import ChatWindow from "./ChatWindow";
+import {
+  reducer as panelReducer,
+  actions as panelActions,
+} from "./panelReducer";
 import ProfilPanel from "./ProfilPanel";
 
 import "./style.css";
@@ -24,7 +28,13 @@ export interface Props {
 const Dashboard = ({ chatRoomList }: Props) => {
   const isMobile = useDetectMobile();
 
-  const [isPanelOpen, setPanel] = useState({
+  // for mobile initially hide asides
+  // const [isPanelOpen, setPanel] = useState({
+  //   left: !isMobile,
+  //   right: !isMobile,
+  // });
+
+  const [panelState, panelDispatch] = useReducer(panelReducer, {
     left: !isMobile,
     right: !isMobile,
   });
@@ -55,24 +65,17 @@ const Dashboard = ({ chatRoomList }: Props) => {
     settingContext.setActiveRoom(data?.joinChatRoom || undefined);
   };
 
-  const handleAsideChange = (side: "left" | "right", isOpen: boolean) => {
-    if (isOpen) {
-      // for mobile we want to have only 1 aside opened at a time
-      if (isMobile) {
-        setPanel({ left: false, right: false, [side]: true });
-      } else {
-        setPanel((state) => ({ ...state, [side]: true }));
-      }
-    } else {
-      setPanel((state) => ({ ...state, [side]: false }));
-    }
+  const handlePanelStateChange = (side: "left" | "right", isOpen: boolean) => {
+    isOpen
+      ? panelDispatch(panelActions.openPanelAction(side, isMobile))
+      : panelDispatch(panelActions.closePanelAction(side));
   };
 
   return (
     <div className="dashboard--container">
       <AsidePanel
-        isOpen={isPanelOpen.left}
-        onIsOpenChange={(isOpen) => handleAsideChange("left", isOpen)}
+        isOpen={panelState.left}
+        onIsOpenChange={(isOpen) => handlePanelStateChange("left", isOpen)}
         side="left"
       >
         <ChatRoomsPanel
@@ -89,8 +92,8 @@ const Dashboard = ({ chatRoomList }: Props) => {
         />
       </main>
       <AsidePanel
-        isOpen={isPanelOpen.right}
-        onIsOpenChange={(isOpen) => handleAsideChange("right", isOpen)}
+        isOpen={panelState.right}
+        onIsOpenChange={(isOpen) => handlePanelStateChange("right", isOpen)}
         side="right"
       >
         <ProfilPanel />
