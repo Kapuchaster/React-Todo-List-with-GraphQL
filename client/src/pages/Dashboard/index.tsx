@@ -2,6 +2,7 @@ import { useContext, useReducer } from "react";
 import { AsidePanel } from "../../components";
 import { SettingsContext } from "../../HOC/WithSettings";
 import useDetectMobile from "../../hooks/useDetectMobile";
+import ChatWindow from "../../views/ChatWindow";
 import {
   ChatRoom,
   CreateChatRoomInput,
@@ -11,13 +12,12 @@ import {
   useCreateMessageMutation,
   useJoinChatRoomMutation,
 } from "../../__generated__/operations-types";
-import ChatRoomsPanel from "./ChatRoomsPanel";
-import ChatWindow from "./ChatWindow";
 import {
-  reducer as panelReducer,
   actions as panelActions,
+  reducer as panelReducer,
 } from "./panelReducer";
-import ProfilPanel from "./ProfilPanel";
+import ChatRoomsPanel from "../../views/ChatRoomsPanel";
+import ProfilPanel from "../../views/ProfilPanel";
 
 import "./style.css";
 

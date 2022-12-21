@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { Button } from "../../../components";
-import ChatBox from "../../../components/ChatBox";
-import Input from "../../../components/Input";
-import { SettingsContext } from "../../../HOC/WithSettings";
-import TEMP_USER_ID from "../../../services/auth";
+import { Button } from "../../components";
+import ChatBox from "../../components/ChatBox";
+import Input from "../../components/Input";
+import { SettingsContext } from "../../HOC/WithSettings";
+import TEMP_USER_ID from "../../services/auth";
 import {
   ChatRoom,
   CreateMessageInput,
   Message,
   useMessageSubscription,
-} from "../../../__generated__/operations-types";
+} from "../../__generated__/operations-types";
 
 interface Props {
   chatRoom?: ChatRoom;

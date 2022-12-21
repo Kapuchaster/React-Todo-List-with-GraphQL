@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { Button, Input } from "../../../components";
-import { SettingsContext } from "../../../HOC/WithSettings";
-import { ThemeContext } from "../../../HOC/WithTheme";
+import { Button, Input } from "../../components";
+import { SettingsContext } from "../../HOC/WithSettings";
+import { ThemeContext } from "../../HOC/WithTheme";
 
 import "./style.css";
 

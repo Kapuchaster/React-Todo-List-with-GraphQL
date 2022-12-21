@@ -1,14 +1,15 @@
 import { useContext } from "react";
-import { Button, RoomTile } from "../../../components";
-import { ModalContext } from "../../../HOC/WithModal";
+import { Button, RoomTile } from "../../components";
+import CreateRoom from "../../components/CreateRoom";
+import ScrollBox from "../../components/ScrollBox";
+import { ModalContext } from "../../HOC/WithModal";
 import {
   ChatRoom,
   CreateChatRoomInput,
-} from "../../../__generated__/operations-types";
-import CreateRoom from "../../../components/CreateRoom";
+} from "../../__generated__/operations-types";
 
 import "./style.css";
-import ScrollBox from "../../../components/ScrollBox";
+
 interface Props {
   chatRoomList?: ChatRoom[];
   selectedChatRoomId?: string;
