@@ -1,3 +1,4 @@
+import { createRef, useEffect } from "react";
 import getMessageFormatTime from "../../services/time";
 import { Message } from "../../__generated__/operations-types";
 import ScrollBox from "../ScrollBox";
@@ -30,9 +31,20 @@ interface Props {
 }
 
 const ChatBox = ({ userId, messageDataList }: Props) => {
+  const scrollBoxRef = createRef<HTMLDivElement>();
+
+  const scrollToBottom = () => {
+    scrollBoxRef.current?.scrollTo(0, scrollBoxRef.current.scrollHeight);
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messageDataList]);
+
   return (
     <div className="chatBox--container">
-      <ScrollBox>
+      <ScrollBox ref={scrollBoxRef}>
         <>
           {messageDataList.map(({ id, text, author, timestamp }) => {
             return (

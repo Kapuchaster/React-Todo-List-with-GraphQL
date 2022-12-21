@@ -1,12 +1,17 @@
-import { ReactElement } from "react";
+import { forwardRef, ReactElement } from "react";
+
 import "./style.css";
 
 interface Props {
   children: ReactElement;
 }
 
-const ScrollBox = ({ children }: Props) => {
-  return <div className="scrollBox--container">{children}</div>;
-};
+const ScrollBox = forwardRef<HTMLDivElement, Props>(({ children }, ref) => {
+  return (
+    <div ref={ref} className="scrollBox">
+      {children}
+    </div>
+  );
+});
 
 export default ScrollBox;
