@@ -28,12 +28,6 @@ export interface Props {
 const Dashboard = ({ chatRoomList }: Props) => {
   const isMobile = useDetectMobile();
 
-  // for mobile initially hide asides
-  // const [isPanelOpen, setPanel] = useState({
-  //   left: !isMobile,
-  //   right: !isMobile,
-  // });
-
   const [panelState, panelDispatch] = useReducer(panelReducer, {
     left: !isMobile,
     right: !isMobile,
