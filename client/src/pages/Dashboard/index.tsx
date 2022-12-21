@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AsidePanel } from "../../components";
 import { SettingsContext } from "../../HOC/WithSettings";
+import useDetectMobile from "../../hooks/useDetectMobile";
 import {
   ChatRoom,
   CreateChatRoomInput,
@@ -21,8 +22,12 @@ export interface Props {
 }
 
 const Dashboard = ({ chatRoomList }: Props) => {
-  const [isLeftPanelOpen, setLeftPanel] = useState(true);
-  const [isRightPanelOpen, setRightPanel] = useState(true);
+  const isMobile = useDetectMobile();
+
+  const [isPanelOpen, setPanel] = useState({
+    left: !isMobile,
+    right: !isMobile,
+  });
 
   const settingContext = useContext(SettingsContext);
 
@@ -50,11 +55,24 @@ const Dashboard = ({ chatRoomList }: Props) => {
     settingContext.setActiveRoom(data?.joinChatRoom || undefined);
   };
 
+  const handleAsideChange = (side: "left" | "right", isOpen: boolean) => {
+    if (isOpen) {
+      // for mobile we want to have only 1 aside opened at a time
+      if (isMobile) {
+        setPanel({ left: false, right: false, [side]: true });
+      } else {
+        setPanel((state) => ({ ...state, [side]: true }));
+      }
+    } else {
+      setPanel((state) => ({ ...state, [side]: false }));
+    }
+  };
+
   return (
     <div className="dashboard--container">
       <AsidePanel
-        isOpen={isLeftPanelOpen}
-        onIsOpenChange={setLeftPanel}
+        isOpen={isPanelOpen.left}
+        onIsOpenChange={(isOpen) => handleAsideChange("left", isOpen)}
         side="left"
       >
         <ChatRoomsPanel
@@ -71,8 +89,8 @@ const Dashboard = ({ chatRoomList }: Props) => {
         />
       </main>
       <AsidePanel
-        isOpen={isRightPanelOpen}
-        onIsOpenChange={setRightPanel}
+        isOpen={isPanelOpen.right}
+        onIsOpenChange={(isOpen) => handleAsideChange("right", isOpen)}
         side="right"
       >
         <ProfilPanel />
