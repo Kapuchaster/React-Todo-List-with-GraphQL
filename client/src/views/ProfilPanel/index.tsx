@@ -1,6 +1,5 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Input } from "@chakra-ui/react";
 import { useContext } from "react";
-import { Input } from "../../components";
 import { SettingsContext } from "../../HOC/WithSettings";
 import { ThemeContext } from "../../HOC/WithTheme";
 
@@ -11,7 +10,8 @@ const ProfilPanel = () => {
   const themeContext = useContext(ThemeContext);
 
   //TODO: use react debouncing
-  const handleInputChange = (value: string) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
     settingsContext.setUsername(value);
   };
 

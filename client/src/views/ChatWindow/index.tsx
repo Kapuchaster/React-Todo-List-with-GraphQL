@@ -1,7 +1,12 @@
-import { Button } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
+import { Button, Input } from "@chakra-ui/react";
+import {
+  DetailedHTMLProps,
+  InputHTMLAttributes,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import ChatBox from "../../components/ChatBox";
-import Input from "../../components/Input";
 import { SettingsContext } from "../../HOC/WithSettings";
 import TEMP_USER_ID from "../../services/auth";
 import {
@@ -39,8 +44,18 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
     }
   }, [messageSubData]);
 
-  const handleInputChange = (value: string) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
     setInput(value);
+  };
+
+  const handleEnterKey = (
+    event: DetailedHTMLProps<
+      InputHTMLAttributes<HTMLInputElement>,
+      HTMLInputElement
+    >
+  ) => {
+    event.key === "Enter" && handleSendMessage();
   };
 
   const handleSendMessage = () => {
@@ -79,7 +94,7 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
           value={input}
           name="messageInput"
           onChange={handleInputChange}
-          onPressEnter={handleSendMessage}
+          onKeyUp={handleEnterKey}
         />
         <Button onClick={handleSendMessage}>{">"}</Button>
       </div>
