@@ -54,7 +54,7 @@ const splitLink = split(
 );
 
 const client = new ApolloClient({
-  uri: "http://188.123.197.196:80/",
+  uri: `http://${process.env.REACT_APP_IP}`,
   link: splitLink,
   cache: new InMemoryCache(),
 });
