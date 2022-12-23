@@ -17,7 +17,7 @@ Monorepo architecture was used to build the project and to split it
 into the Backend, Frontend and Common parts
 ## Frontend
 * React 18
-* CSS _will later be exchanged for styled components or SCSS_
+* Chakra UI
 
 ## Backend
 * Apollo server 4
