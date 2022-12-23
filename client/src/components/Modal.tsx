@@ -1,3 +1,4 @@
+import { Button } from "@chakra-ui/react";
 import { useEffect } from "react";
 import Modal from "react-modal";
 
@@ -34,7 +35,7 @@ const ModalComponent = ({ content, onClose }: Props) => {
       contentLabel="Example Modal"
     >
       {content}
-      <button onClick={closeModal}>close</button>
+      <Button onClick={closeModal}>close</Button>
     </Modal>
   );
 };

@@ -3,6 +3,7 @@ import { WithModalContext } from "./HOC/WithModal";
 import { WithSettingsContext } from "./HOC/WithSettings";
 import { WithThemeContext } from "./HOC/WithTheme";
 import Dashboard from "./pages/Dashboard";
+import { ChakraProvider } from "@chakra-ui/react";
 
 import {
   ChatRoom,
@@ -35,9 +36,11 @@ function App() {
   return (
     <WithSettingsContext>
       <WithThemeContext>
-        <WithModalContext>
-          <Dashboard chatRoomList={chatRoomList} />
-        </WithModalContext>
+        <ChakraProvider>
+          <WithModalContext>
+            <Dashboard chatRoomList={chatRoomList} />
+          </WithModalContext>
+        </ChakraProvider>
       </WithThemeContext>
     </WithSettingsContext>
   );

@@ -1,5 +1,5 @@
+import { Button } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
-import { Button } from "../../components";
 import ChatBox from "../../components/ChatBox";
 import Input from "../../components/Input";
 import { SettingsContext } from "../../HOC/WithSettings";
@@ -81,7 +81,7 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
           onChange={handleInputChange}
           onPressEnter={handleSendMessage}
         />
-        <Button title=">" variant="primary" onClick={handleSendMessage} />
+        <Button onClick={handleSendMessage}>{">"}</Button>
       </div>
     </div>
   );

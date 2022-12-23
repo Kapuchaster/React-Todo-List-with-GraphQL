@@ -1,5 +1,6 @@
+import { Button } from "@chakra-ui/react";
 import { useContext } from "react";
-import { Button, RoomTile } from "../../components";
+import { RoomTile } from "../../components";
 import CreateRoom from "../../components/CreateRoom";
 import ScrollBox from "../../components/ScrollBox";
 import { ModalContext } from "../../HOC/WithModal";
@@ -46,7 +47,7 @@ const ChatRoomsPanel = ({
           ))}
         </>
       </ScrollBox>
-      <Button title="Add" variant="primary" onClick={openCreateModal} />
+      <Button onClick={openCreateModal}>ADD</Button>
     </div>
   );
 };

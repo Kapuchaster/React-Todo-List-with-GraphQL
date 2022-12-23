@@ -1,4 +1,6 @@
+import { Box, Button } from "@chakra-ui/react";
 import { ReactElement } from "react";
+
 import "./style.css";
 
 interface Props {
@@ -13,14 +15,15 @@ const AsidePanel = ({ isOpen, side, children, onIsOpenChange }: Props) => {
 
   return (
     <div className={`aside__container aside__container--${side}`}>
-      <button
-        className={`aside__button--${side}`}
-        onClick={() => {
-          onIsOpenChange(!isOpen);
-        }}
-      >
-        open/close
-      </button>
+      <Box className={`aside__button--${side}`}>
+        <Button
+          onClick={() => {
+            onIsOpenChange(!isOpen);
+          }}
+        >
+          open/close
+        </Button>
+      </Box>
       <aside
         style={{ position: "absolute" }}
         className={`aside__content aside__${side}--${isActive}`}

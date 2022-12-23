@@ -1,5 +1,6 @@
+import { Button } from "@chakra-ui/react";
 import { useContext } from "react";
-import { Button, Input } from "../../components";
+import { Input } from "../../components";
 import { SettingsContext } from "../../HOC/WithSettings";
 import { ThemeContext } from "../../HOC/WithTheme";
 

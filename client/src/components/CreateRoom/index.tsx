@@ -1,6 +1,7 @@
+import { Button } from "@chakra-ui/react";
 import { useState } from "react";
-import Input from "../Input";
 import { CreateChatRoomInput } from "../../__generated__/operations-types";
+import Input from "../Input";
 
 interface Props {
   onAddNewRoom: (input: CreateChatRoomInput) => void;
@@ -34,7 +35,7 @@ const CreateRoom = ({ onAddNewRoom }: Props) => {
         value={newRoom.description}
         onChange={handleChangeInput}
       />
-      <button onClick={handleAddNewRoom}>Add New Room</button>
+      <Button onClick={handleAddNewRoom}>Add New Room</Button>
     </div>
   );
 };
