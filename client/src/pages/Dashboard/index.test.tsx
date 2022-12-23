@@ -4,6 +4,7 @@ import { MockedProvider } from "@apollo/client/testing";
 import { render, screen } from "@testing-library/react";
 import { WithModalContext } from "../../HOC/WithModal";
 
+import { ChakraProvider } from "@chakra-ui/react";
 import Dashboard, { Props } from "./index";
 
 const renderComponent = ({ chatRoomList }: Props) => {
@@ -24,7 +25,7 @@ describe("Dashboard renders correctly", () => {
 
     expect(screen.getByText("Select or create a Chat Room")).toBeDefined();
     expect(screen.getByText("ChatRoomsPanel")).toBeDefined();
-    expect(screen.getByText("Add")).toBeDefined();
+    expect(screen.getByText("ADD")).toBeDefined();
   });
 
   it("Should display chat rooms", () => {
