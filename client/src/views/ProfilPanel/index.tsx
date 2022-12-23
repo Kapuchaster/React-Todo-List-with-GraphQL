@@ -1,26 +1,18 @@
-import { Button, Input } from "@chakra-ui/react";
+import { Button, Input, useColorMode } from "@chakra-ui/react";
 import { useContext } from "react";
 import { SettingsContext } from "../../HOC/WithSettings";
-import { ThemeContext } from "../../HOC/WithTheme";
 
 import "./style.css";
 
 const ProfilPanel = () => {
   const settingsContext = useContext(SettingsContext);
-  const themeContext = useContext(ThemeContext);
+
+  const { toggleColorMode } = useColorMode();
 
   //TODO: use react debouncing
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     settingsContext.setUsername(value);
-  };
-
-  const handleThemeChange = () => {
-    if (themeContext.theme === "light") {
-      themeContext.setTheme("dark");
-    } else {
-      themeContext.setTheme("light");
-    }
   };
 
   return (
@@ -32,11 +24,9 @@ const ProfilPanel = () => {
         name="username"
         onChange={handleInputChange}
       />
-      <Button
-        title="Switch Theme"
-        variant="primary"
-        onClick={handleThemeChange}
-      />
+      <Button variant="primary" onClick={toggleColorMode}>
+        Switch Theme
+      </Button>
     </div>
   );
 };

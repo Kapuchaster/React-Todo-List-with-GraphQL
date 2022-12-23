@@ -1,9 +1,8 @@
+import { ChakraProvider } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { WithModalContext } from "./HOC/WithModal";
 import { WithSettingsContext } from "./HOC/WithSettings";
-import { WithThemeContext } from "./HOC/WithTheme";
 import Dashboard from "./pages/Dashboard";
-import { ChakraProvider } from "@chakra-ui/react";
 
 import {
   ChatRoom,
@@ -35,13 +34,11 @@ function App() {
 
   return (
     <WithSettingsContext>
-      <WithThemeContext>
-        <ChakraProvider>
-          <WithModalContext>
-            <Dashboard chatRoomList={chatRoomList} />
-          </WithModalContext>
-        </ChakraProvider>
-      </WithThemeContext>
+      <ChakraProvider>
+        <WithModalContext>
+          <Dashboard chatRoomList={chatRoomList} />
+        </WithModalContext>
+      </ChakraProvider>
     </WithSettingsContext>
   );
 }
