@@ -24,7 +24,7 @@ const ProfilPanel = () => {
         name="username"
         onChange={handleInputChange}
       />
-      <Button variant="primary" onClick={toggleColorMode}>
+      <Button colorScheme="red" onClick={toggleColorMode}>
         Switch Theme
       </Button>
     </div>

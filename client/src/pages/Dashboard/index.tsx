@@ -19,7 +19,7 @@ import {
 import ChatRoomsPanel from "../../views/ChatRoomsPanel";
 import ProfilPanel from "../../views/ProfilPanel";
 
-import "./style.css";
+import { Flex, useColorModeValue } from "@chakra-ui/react";
 
 export interface Props {
   chatRoomList: ChatRoom[];
@@ -27,6 +27,8 @@ export interface Props {
 
 const Dashboard = ({ chatRoomList }: Props) => {
   const isMobile = useDetectMobile();
+  const blueBg = useColorModeValue("blue.300", "blue.800");
+  const pinkBg = useColorModeValue("pink.300", "pink.800");
 
   const [panelState, panelDispatch] = useReducer(panelReducer, {
     left: !isMobile,
@@ -66,7 +68,13 @@ const Dashboard = ({ chatRoomList }: Props) => {
   };
 
   return (
-    <div className="dashboard--container">
+    <Flex
+      w="100%"
+      h="100vh"
+      justifyContent="center"
+      alignItems="center"
+      bgGradient={`linear(to-r, ${blueBg}, ${pinkBg})`}
+    >
       <AsidePanel
         isOpen={panelState.left}
         onIsOpenChange={(isOpen) => handlePanelStateChange("left", isOpen)}
@@ -92,7 +100,7 @@ const Dashboard = ({ chatRoomList }: Props) => {
       >
         <ProfilPanel />
       </AsidePanel>
-    </div>
+    </Flex>
   );
 };
 
