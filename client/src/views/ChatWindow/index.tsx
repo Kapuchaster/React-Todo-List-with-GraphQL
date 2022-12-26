@@ -1,4 +1,5 @@
-import { Button, Input } from "@chakra-ui/react";
+import { ArrowRightIcon } from "@chakra-ui/icons";
+import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import {
   DetailedHTMLProps,
   InputHTMLAttributes,
@@ -89,14 +90,19 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
         <ChatBox messageDataList={messageList} userId={TEMP_USER_ID} />
       </div>
       <div style={{ display: "flex" }}>
-        <Input
-          size="lg"
-          value={input}
-          name="messageInput"
-          onChange={handleInputChange}
-          onKeyUp={handleEnterKey}
-        />
-        <Button onClick={handleSendMessage}>{">"}</Button>
+        <InputGroup size="lg">
+          <Input
+            value={input}
+            name="messageInput"
+            onChange={handleInputChange}
+            onKeyUp={handleEnterKey}
+          />
+          <InputRightElement>
+            <Button variant='ghost' onClick={handleSendMessage}>
+              <ArrowRightIcon />
+            </Button>
+          </InputRightElement>
+        </InputGroup>
       </div>
     </div>
   );
