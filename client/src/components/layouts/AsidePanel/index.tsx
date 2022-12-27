@@ -19,10 +19,22 @@ const AsidePanel = ({
   onIsOpenChange,
 }: Props) => {
   const isActive = isOpen ? "active" : "inActive";
+  console.log(backgroundColor);
 
   return (
-    <div className={`aside__container aside__container--${side}`}>
-      <Box className={`aside__button--${side}`}>
+    <Box
+      position="absolute"
+      top="0"
+      zIndex="2"
+      left={side === "left" ? 0 : "auto"}
+      right={side === "left" ? "auto" : 0}
+    >
+      <Box
+        position="absolute"
+        zIndex="1"
+        left={side === "left" ? 0 : "auto"}
+        right={side === "left" ? "auto" : 0}
+      >
         <Button
           onClick={() => {
             onIsOpenChange(!isOpen);
@@ -31,13 +43,12 @@ const AsidePanel = ({
           open/close
         </Button>
       </Box>
-      <aside
-        style={{ position: "absolute", backgroundColor }}
-        className={`aside__content aside__${side}--${isActive}`}
-      >
-        {children}
+      <aside className={`aside aside__${side}--${isActive}`}>
+        <Box backgroundColor={backgroundColor} height="100%">
+          {children}
+        </Box>
       </aside>
-    </div>
+    </Box>
   );
 };
 
