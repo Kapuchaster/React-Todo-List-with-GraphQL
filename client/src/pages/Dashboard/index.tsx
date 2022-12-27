@@ -79,6 +79,7 @@ const Dashboard = ({ chatRoomList }: Props) => {
         isOpen={panelState.left}
         onIsOpenChange={(isOpen) => handlePanelStateChange("left", isOpen)}
         side="left"
+        backgroundColor={blueBg}
       >
         <ChatRoomsPanel
           chatRoomList={chatRoomList}
@@ -97,6 +98,7 @@ const Dashboard = ({ chatRoomList }: Props) => {
         isOpen={panelState.right}
         onIsOpenChange={(isOpen) => handlePanelStateChange("right", isOpen)}
         side="right"
+        backgroundColor={pinkBg}
       >
         <ProfilPanel />
       </AsidePanel>

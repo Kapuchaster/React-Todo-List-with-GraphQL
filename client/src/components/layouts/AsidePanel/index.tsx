@@ -7,10 +7,17 @@ interface Props {
   isOpen: boolean;
   side: "left" | "right";
   children: ReactElement;
+  backgroundColor?: string;
   onIsOpenChange: (isOpen: boolean) => void;
 }
 
-const AsidePanel = ({ isOpen, side, children, onIsOpenChange }: Props) => {
+const AsidePanel = ({
+  isOpen,
+  side,
+  backgroundColor = "white",
+  children,
+  onIsOpenChange,
+}: Props) => {
   const isActive = isOpen ? "active" : "inActive";
 
   return (
@@ -25,7 +32,7 @@ const AsidePanel = ({ isOpen, side, children, onIsOpenChange }: Props) => {
         </Button>
       </Box>
       <aside
-        style={{ position: "absolute" }}
+        style={{ position: "absolute", backgroundColor }}
         className={`aside__content aside__${side}--${isActive}`}
       >
         {children}
