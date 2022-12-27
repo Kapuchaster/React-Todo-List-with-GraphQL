@@ -1,13 +1,21 @@
-import { Button, Input, useColorMode } from "@chakra-ui/react";
+import {
+  Flex,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Stack,
+  Switch,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import { useContext } from "react";
 import { SettingsContext } from "../../HOC/WithSettings";
-
-import "./style.css";
 
 const ProfilPanel = () => {
   const settingsContext = useContext(SettingsContext);
 
-  const { toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   //TODO: use react debouncing
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,18 +24,30 @@ const ProfilPanel = () => {
   };
 
   return (
-    <div className="profilPanel">
-      <h1>Profile</h1>
-      <p>username:</p>
-      <Input
-        value={settingsContext.username}
-        name="username"
-        onChange={handleInputChange}
-      />
-      <Button colorScheme="red" onClick={toggleColorMode}>
-        Switch Theme
-      </Button>
-    </div>
+    <Flex pt="4rem" height="100%" flexDir="column">
+      <Heading textAlign="center" size="lg">
+        Profile
+      </Heading>
+      <Stack align="center" justify="center" spacing="2">
+        <FormControl>
+          <FormLabel>Username</FormLabel>
+          <Input
+            value={settingsContext.username}
+            name="username"
+            onChange={handleInputChange}
+          />
+        </FormControl>
+        <Stack align="center" direction="row">
+          <Text>Light</Text>
+          <Switch
+            size="lg"
+            isChecked={colorMode === "dark"}
+            onChange={toggleColorMode}
+          />
+          <Text>Dark</Text>
+        </Stack>
+      </Stack>
+    </Flex>
   );
 };
 

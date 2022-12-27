@@ -29,7 +29,9 @@ const ChatRoomsPanel = ({
 
   return (
     <Flex pt="4rem" height="100%" flexDir="column">
-      <Heading size="lg">ChatRoomsPanel</Heading>
+      <Heading textAlign="center" size="lg">
+        ChatRoomsPanel
+      </Heading>
       <Spacer />
       <Box height="60%">
         <ScrollBox>
