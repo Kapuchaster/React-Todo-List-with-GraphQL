@@ -18,6 +18,7 @@ import {
 } from "react";
 import ChatBox from "../../components/ChatBox";
 import { SettingsContext } from "../../HOC/WithSettings";
+import useDetectMobile from "../../hooks/useDetectMobile";
 import TEMP_USER_ID from "../../services/auth";
 import {
   ChatRoom,
@@ -36,6 +37,8 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
   const [messageList, setMessageList] = useState<Message[]>(
     chatRoom?.messages || []
   );
+
+  const isMobile = useDetectMobile();
 
   const settingsContext = useContext(SettingsContext);
 
@@ -85,7 +88,12 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
   }
 
   return (
-    <Flex height="100vh" width="35rem" alignItems="stretch" flexDir="column">
+    <Flex
+      height="100vh"
+      width={isMobile ? "100%" : "35rem"}
+      alignItems="stretch"
+      flexDir="column"
+    >
       <Box>
         <Heading size="lg">{chatRoom.title}</Heading>
         <Text>{chatRoom.description}</Text>
