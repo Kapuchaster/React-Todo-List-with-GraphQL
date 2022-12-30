@@ -1,5 +1,5 @@
 import { createContext, ReactElement, useState } from "react";
-import ModalComponent from "../components/Modal";
+import { Modal } from "../components";
 
 interface ModalContextProps {
   open: (content: JSX.Element) => void;
@@ -22,7 +22,7 @@ export const WithModalContext = ({ children }: { children: ReactElement }) => {
     <ModalContext.Provider value={initValue}>
       <>
         {children}
-        <ModalComponent content={hasContent} onClose={handleClose} />
+        <Modal content={hasContent} onClose={handleClose} />
       </>
     </ModalContext.Provider>
   );

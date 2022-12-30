@@ -1,4 +1,4 @@
-import { Button, Input } from "@chakra-ui/react";
+import { Box, Button, Input, useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
 import { CreateChatRoomInput } from "../../__generated__/operations-types";
 
@@ -13,6 +13,10 @@ const CreateRoom = ({ onAddNewRoom }: Props) => {
   });
 
   const handleAddNewRoom = () => {
+    if (!newRoom.title || newRoom.description) {
+      console.log("Implement Alerts");
+      return;
+    }
     onAddNewRoom({ title: newRoom.title, description: newRoom.description });
   };
 
@@ -22,7 +26,7 @@ const CreateRoom = ({ onAddNewRoom }: Props) => {
   };
 
   return (
-    <div>
+    <Box>
       <Input
         name="title"
         placeholder="title"
@@ -36,7 +40,7 @@ const CreateRoom = ({ onAddNewRoom }: Props) => {
         onChange={handleInputChange}
       />
       <Button onClick={handleAddNewRoom}>Add New Room</Button>
-    </div>
+    </Box>
   );
 };
 

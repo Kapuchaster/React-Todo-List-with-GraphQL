@@ -8,7 +8,6 @@ interface Props {
   side: "left" | "right";
   children: ReactElement;
   backgroundColor?: string;
-  onIsOpenChange: (isOpen: boolean) => void;
 }
 
 const AsidePanel = ({
@@ -16,10 +15,8 @@ const AsidePanel = ({
   side,
   backgroundColor = "white",
   children,
-  onIsOpenChange,
 }: Props) => {
   const isActive = isOpen ? "active" : "inActive";
-  console.log(backgroundColor);
 
   return (
     <Box
@@ -28,21 +25,10 @@ const AsidePanel = ({
       zIndex="2"
       left={side === "left" ? 0 : "auto"}
       right={side === "left" ? "auto" : 0}
+      paddingLeft={side === "left" ? "0" : "30px"}
+      paddingRight={side === "left" ? "30px" : "0"}
+      overflow="hidden"
     >
-      <Box
-        position="absolute"
-        zIndex="1"
-        left={side === "left" ? 0 : "auto"}
-        right={side === "left" ? "auto" : 0}
-      >
-        <Button
-          onClick={() => {
-            onIsOpenChange(!isOpen);
-          }}
-        >
-          open/close
-        </Button>
-      </Box>
       <aside className={`aside aside__${side}--${isActive}`}>
         <Box backgroundColor={backgroundColor} height="100%">
           {children}

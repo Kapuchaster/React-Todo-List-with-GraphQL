@@ -18,8 +18,7 @@ import {
 } from "./panelReducer";
 import ChatRoomsPanel from "../../views/ChatRoomsPanel";
 import ProfilPanel from "../../views/ProfilPanel";
-
-import { Flex, useColorModeValue } from "@chakra-ui/react";
+import { Button, Flex, useColorModeValue } from "@chakra-ui/react";
 
 export interface Props {
   chatRoomList: ChatRoom[];
@@ -76,12 +75,18 @@ const Dashboard = ({ chatRoomList }: Props) => {
       alignItems="center"
       bgGradient={`linear(to-r, ${blueBg}, ${pinkBg})`}
     >
-      <AsidePanel
-        isOpen={panelState.left}
-        onIsOpenChange={(isOpen) => handlePanelStateChange("left", isOpen)}
-        side="left"
-        backgroundColor={blueBg}
+      <Button
+        position="absolute"
+        left="0"
+        top="0"
+        zIndex={3}
+        onClick={() => {
+          handlePanelStateChange("left", !panelState.left);
+        }}
       >
+        open/close
+      </Button>
+      <AsidePanel isOpen={panelState.left} side="left" backgroundColor={blueBg}>
         <ChatRoomsPanel
           chatRoomList={chatRoomList}
           selectedChatRoomId={settingContext.activeRoom?.id}
@@ -95,9 +100,19 @@ const Dashboard = ({ chatRoomList }: Props) => {
           onCreateMessage={handleCreateMessage}
         />
       </main>
+      <Button
+        position="absolute"
+        right="0"
+        top="0"
+        zIndex={3}
+        onClick={() => {
+          handlePanelStateChange("right", !panelState.right);
+        }}
+      >
+        open/close
+      </Button>
       <AsidePanel
         isOpen={panelState.right}
-        onIsOpenChange={(isOpen) => handlePanelStateChange("right", isOpen)}
         side="right"
         backgroundColor={pinkBg}
       >
