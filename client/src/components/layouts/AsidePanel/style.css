@@ -34,15 +34,6 @@
   }
 }
 
-.aside {
-  position: relative;
-  height: 100vh;
-  width: 20rem;
-  -webkit-box-shadow: 0px 0px 30px -5px #454545;
-  -moz-box-shadow: 0px 0px 30px -5px #454545;
-  box-shadow: 0px 0px 30px -5px #454545;
-}
-
 .aside__left--active {
   left: 0;
   animation-name: revealFromLeft;
