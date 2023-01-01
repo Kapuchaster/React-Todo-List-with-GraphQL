@@ -1,8 +1,11 @@
+import { Button, Flex, useColorModeValue } from "@chakra-ui/react";
 import { useContext, useReducer } from "react";
 import { AsidePanel } from "../../components";
 import { SettingsContext } from "../../HOC/WithSettings";
 import useDetectMobile from "../../hooks/useDetectMobile";
+import ChatRoomsPanel from "../../views/ChatRoomsPanel";
 import ChatWindow from "../../views/ChatWindow";
+import ProfilPanel from "../../views/ProfilPanel";
 import {
   ChatRoom,
   CreateChatRoomInput,
@@ -16,9 +19,6 @@ import {
   actions as panelActions,
   reducer as panelReducer,
 } from "./panelReducer";
-import ChatRoomsPanel from "../../views/ChatRoomsPanel";
-import ProfilPanel from "../../views/ProfilPanel";
-import { Button, Flex, useColorModeValue } from "@chakra-ui/react";
 
 export interface Props {
   chatRoomList: ChatRoom[];
@@ -69,10 +69,10 @@ const Dashboard = ({ chatRoomList }: Props) => {
 
   return (
     <Flex
-      w="100%"
+      w="100vw"
       h="100vh"
       justifyContent="center"
-      alignItems="center"
+      alignItems="stretch"
       bgGradient={`linear(to-r, ${blueBg}, ${pinkBg})`}
     >
       <Button
@@ -84,7 +84,7 @@ const Dashboard = ({ chatRoomList }: Props) => {
           handlePanelStateChange("left", !panelState.left);
         }}
       >
-        open/close
+        Rooms
       </Button>
       <AsidePanel isOpen={panelState.left} side="left" backgroundColor={blueBg}>
         <ChatRoomsPanel
@@ -94,12 +94,17 @@ const Dashboard = ({ chatRoomList }: Props) => {
           onSelectChatRoom={handleSelectRoom}
         />
       </AsidePanel>
-      <main>
+      <Flex
+        as="main"
+        w={isMobile ? "100vw" : "34rem"}
+        justifyContent="center"
+        alignItems="center"
+      >
         <ChatWindow
           chatRoom={settingContext.activeRoom}
           onCreateMessage={handleCreateMessage}
         />
-      </main>
+      </Flex>
       <Button
         position="absolute"
         right="0"
@@ -109,7 +114,7 @@ const Dashboard = ({ chatRoomList }: Props) => {
           handlePanelStateChange("right", !panelState.right);
         }}
       >
-        open/close
+        Profil
       </Button>
       <AsidePanel
         isOpen={panelState.right}

@@ -59,7 +59,7 @@ const ChatBox = ({ userId, messageDataList }: Props) => {
   }, [messageDataList]);
 
   return (
-    <Box h="100%" p="1rem">
+    <Flex flex="1" p="1rem">
       <ScrollBox ref={scrollBoxRef}>
         <>
           {messageDataList.map(({ id, text, author, timestamp }) => {
@@ -76,7 +76,7 @@ const ChatBox = ({ userId, messageDataList }: Props) => {
           })}
         </>
       </ScrollBox>
-    </Box>
+    </Flex>
   );
 };
 

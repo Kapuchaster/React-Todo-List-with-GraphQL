@@ -1,6 +1,5 @@
+import { Flex } from "@chakra-ui/react";
 import { forwardRef, ReactElement } from "react";
-
-import "./style.css";
 
 interface Props {
   children: ReactElement;
@@ -8,9 +7,9 @@ interface Props {
 
 const ScrollBox = forwardRef<HTMLDivElement, Props>(({ children }, ref) => {
   return (
-    <div ref={ref} className="scrollBox">
+    <Flex flex="1" flexDirection="column" ref={ref} overflow="scroll">
       {children}
-    </div>
+    </Flex>
   );
 });
 

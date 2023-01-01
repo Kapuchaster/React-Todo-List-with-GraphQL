@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { ReactElement } from "react";
 
 import "./style.css";
@@ -19,25 +19,32 @@ const AsidePanel = ({
   const isActive = isOpen ? "active" : "inActive";
 
   return (
-    <Box
+    <Flex
       as="aside"
-      position="absolute"
-      h="100vh"
+      pos="absolute"
+      overflow="hidden"
       top="0"
+      h="100vh"
+      width="22rem"
       zIndex="2"
+      left={side === "left" ? 0 : "auto"}
+      right={side === "left" ? "auto" : 0}
       paddingLeft={side === "left" ? "0" : "30px"}
       paddingRight={side === "left" ? "30px" : "0"}
-      className={`aside__${side}--${isActive}`}
+      pointerEvents="none"
     >
       <Box
-        boxShadow='2xl'
+        pos="absolute"
+        h="100%"
+        className={`aside__${side}--${isActive}`}
+        boxShadow="2xl"
         bg={backgroundColor}
-        height="100%"
         width="20rem"
+        pointerEvents="auto"
       >
         {children}
       </Box>
-    </Box>
+    </Flex>
   );
 };
 

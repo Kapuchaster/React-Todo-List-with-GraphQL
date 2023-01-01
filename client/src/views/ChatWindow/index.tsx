@@ -18,7 +18,6 @@ import {
 } from "react";
 import ChatBox from "../../components/ChatBox";
 import { SettingsContext } from "../../HOC/WithSettings";
-import useDetectMobile from "../../hooks/useDetectMobile";
 import TEMP_USER_ID from "../../services/auth";
 import {
   ChatRoom,
@@ -37,8 +36,6 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
   const [messageList, setMessageList] = useState<Message[]>(
     chatRoom?.messages || []
   );
-
-  const isMobile = useDetectMobile();
 
   const settingsContext = useContext(SettingsContext);
 
@@ -84,23 +81,18 @@ const ChatWindow = ({ chatRoom, onCreateMessage }: Props) => {
   };
 
   if (!chatRoom) {
-    return <h1>Select or create a Chat Room</h1>;
+    return <Box as="h1">Select or create a Chat Room</Box>;
   }
 
   return (
-    <Flex
-      height="100vh"
-      width={isMobile ? "100%" : "35rem"}
-      alignItems="stretch"
-      flexDir="column"
-    >
-      <Box>
+    <Flex flex="1" flexDir="column" alignSelf="stretch">
+      <Box textAlign="center">
         <Heading size="lg">{chatRoom.title}</Heading>
         <Text>{chatRoom.description}</Text>
       </Box>
-      <Box flex="1" bg="#ffffff1f" rounded="lg">
+      <Flex flex="1" overflow="scroll" rounded="lg">
         <ChatBox messageDataList={messageList} userId={TEMP_USER_ID} />
-      </Box>
+      </Flex>
       <Box mb="6" mt="1">
         <InputGroup size="lg">
           <Input
