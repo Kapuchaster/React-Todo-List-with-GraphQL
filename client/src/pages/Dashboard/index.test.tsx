@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 
-import { MockedProvider } from "@apollo/client/testing";
+import { MockedProvider as ApolloProvider } from "@apollo/client/testing";
 import { render, screen } from "@testing-library/react";
 import { WithModalContext } from "../../HOC/WithModal";
 
@@ -10,11 +10,13 @@ import Dashboard, { Props } from "./index";
 const renderComponent = ({ chatRoomList }: Props) => {
   return render(
     <div id="root">
-      <MockedProvider mocks={[]} addTypename={false}>
-        <WithModalContext>
-          <Dashboard chatRoomList={chatRoomList} />
-        </WithModalContext>
-      </MockedProvider>
+      <ApolloProvider mocks={[]} addTypename={false}>
+        <ChakraProvider>
+          <WithModalContext>
+            <Dashboard chatRoomList={chatRoomList} />
+          </WithModalContext>
+        </ChakraProvider>
+      </ApolloProvider>
     </div>
   );
 };
