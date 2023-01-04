@@ -15,6 +15,9 @@ import reportWebVitals from "./reportWebVitals";
 import userId from "./services/auth";
 
 import "./index.css";
+import { ChakraProvider } from "@chakra-ui/react";
+import { WithModalContext } from "./HOC/WithModal";
+import { WithSettingsContext } from "./HOC/WithSettings";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -62,7 +65,13 @@ const client = new ApolloClient({
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <WithSettingsContext>
+        <ChakraProvider>
+          <WithModalContext>
+            <App />
+          </WithModalContext>
+        </ChakraProvider>
+      </WithSettingsContext>
     </ApolloProvider>
   </React.StrictMode>
 );

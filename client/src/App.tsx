@@ -1,7 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { WithModalContext } from "./HOC/WithModal";
-import { WithSettingsContext } from "./HOC/WithSettings";
 import Dashboard from "./pages/Dashboard";
 
 import {
@@ -30,15 +27,7 @@ function App() {
     }
   }, [chatRoomSubData]);
 
-  return (
-    <WithSettingsContext>
-      <ChakraProvider>
-        <WithModalContext>
-          <Dashboard chatRoomList={chatRoomList} />
-        </WithModalContext>
-      </ChakraProvider>
-    </WithSettingsContext>
-  );
+  return <Dashboard chatRoomList={chatRoomList} />;
 }
 
 export default App;
