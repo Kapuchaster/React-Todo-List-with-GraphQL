@@ -13,7 +13,7 @@ const CreateRoom = ({ onAddNewRoom }: Props) => {
   });
 
   const handleAddNewRoom = () => {
-    if (!newRoom.title || newRoom.description) {
+    if (!newRoom.title || !newRoom.description) {
       console.log("Implement Alerts");
       return;
     }
