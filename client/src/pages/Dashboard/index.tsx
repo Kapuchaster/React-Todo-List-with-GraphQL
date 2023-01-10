@@ -86,7 +86,7 @@ const Dashboard = ({ chatRoomList }: Props) => {
       >
         Rooms
       </Button>
-      <AsidePanel isOpen={panelState.left} side="left" backgroundColor={blueBg}>
+      <AsidePanel isOpen={panelState.left} side="left" backgroundColor={blueBg} testName="chat-rooms">
         <ChatRoomsPanel
           chatRoomList={chatRoomList}
           selectedChatRoomId={settingContext.activeRoom?.id}
@@ -120,6 +120,7 @@ const Dashboard = ({ chatRoomList }: Props) => {
         isOpen={panelState.right}
         side="right"
         backgroundColor={pinkBg}
+        testName="profile"
       >
         <ProfilPanel />
       </AsidePanel>

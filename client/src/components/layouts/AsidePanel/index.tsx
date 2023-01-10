@@ -6,6 +6,7 @@ import "./style.css";
 interface Props {
   isOpen: boolean;
   side: "left" | "right";
+  testName: string;
   children: ReactElement;
   backgroundColor?: string;
 }
@@ -13,6 +14,7 @@ interface Props {
 const AsidePanel = ({
   isOpen,
   side,
+  testName,
   backgroundColor = "white",
   children,
 }: Props) => {
@@ -32,6 +34,7 @@ const AsidePanel = ({
       paddingLeft={side === "left" ? "0" : "30px"}
       paddingRight={side === "left" ? "30px" : "0"}
       pointerEvents="none"
+      data-testid={`aside-${testName}`}
     >
       <Box
         pos="absolute"
