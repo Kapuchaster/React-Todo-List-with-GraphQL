@@ -26,6 +26,8 @@ export interface Props {
 
 const Dashboard = ({ chatRoomList }: Props) => {
   const isMobile = useDetectMobile();
+  // console.log(isMobile);
+  
   //TODO create custom Chakra Theme
   const blueBg = useColorModeValue("blue.300", "blue.800");
   const pinkBg = useColorModeValue("pink.300", "pink.800");

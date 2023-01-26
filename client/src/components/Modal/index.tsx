@@ -1,6 +1,7 @@
 import { Box, Button, useColorModeValue } from "@chakra-ui/react";
 import { useEffect } from "react";
 import Modal from "react-modal";
+
 import "./style.css";
 
 interface Props {
@@ -25,9 +26,9 @@ const ModalComponent = ({ content, onClose }: Props) => {
     <Modal
       isOpen={!!content}
       onRequestClose={closeModal}
-      contentLabel="Modal"
-      className="Modal"
-      overlayClassName="Overlay"
+      contentLabel="modal"
+      className="modal"
+      overlayClassName="overlay"
     >
       <Box
         padding="2.5rem"

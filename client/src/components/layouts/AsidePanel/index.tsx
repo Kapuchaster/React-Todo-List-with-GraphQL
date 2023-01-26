@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { ReactElement } from "react";
 
-import "./style.css";
+import styles from "./style.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -39,7 +39,7 @@ const AsidePanel = ({
       <Box
         pos="absolute"
         h="100%"
-        className={`aside__${side}--${isActive}`}
+        className={styles[`aside__${side}--${isActive}`]}
         boxShadow="2xl"
         bg={backgroundColor}
         width="20rem"
