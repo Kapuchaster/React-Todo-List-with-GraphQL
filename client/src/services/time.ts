@@ -1,7 +1,5 @@
 /** Takes timestamp and formates it to the hh:mm:ss format */
 const getMessageFormatTime = (timestamp: string) => {
-  console.log(timestamp);
-  
   const date = new Date(Number(timestamp));
   const hours = date.getHours().toString();
   let minutes = date.getMinutes().toString();
