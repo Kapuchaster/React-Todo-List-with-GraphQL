@@ -1,35 +1,22 @@
+import { MockedResponse } from "@apollo/client/testing";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
-import { fireEvent, render, screen, waitFor, within } from "../../test-utils";
+import { render, screen, within } from "../../test-utils";
 import Dashboard, { Props } from "./index";
+// eslint-disable-next-line jest/no-mocks-import
+import { default as chatRoomListMock } from "../../__mocks__/chatRoomList";
+// eslint-disable-next-line jest/no-mocks-import
+import getJoinChatRoomDocumentMock from "../../__mocks__/mutations/joinChatRoomDocument";
 
-const __MOCKED_CHAT_ROOM_LIST__ = [
-  {
-    id: "roomId_1",
-    title: "roomTitle_1",
-    messages: [],
-    description: "roomDescription_1",
-    participants: [{ id: "p_1", name: "partName_1" }],
-  },
-  {
-    id: "roomId_2",
-    title: "roomTitle_2",
-    messages: [],
-    description: "roomDescription_2",
-    participants: [{ id: "p_2", name: "partName_2" }],
-  },
-];
-
-const renderComponent = ({ chatRoomList }: Props) => {
-  return render(
-    <div id="root">
-      <Dashboard chatRoomList={chatRoomList} />
-    </div>
-  );
+const renderComponent = ({
+  chatRoomList,
+  mocks,
+}: Props & { mocks?: MockedResponse<Record<string, any>>[] }) => {
+  return render(<Dashboard chatRoomList={chatRoomList} />, mocks);
 };
 
 describe("Dashboard renders correctly", () => {
-  it("Should display empty dashboard", () => {
+  it("Should display empty dashboard with side panels", () => {
     renderComponent({ chatRoomList: [] });
 
     // Checks if aside panels are rendered
@@ -53,52 +40,55 @@ describe("Dashboard renders correctly", () => {
 
   it("Should display chat rooms", () => {
     renderComponent({
-      chatRoomList: __MOCKED_CHAT_ROOM_LIST__,
+      chatRoomList: chatRoomListMock,
     });
 
-    expect(screen.getByText("roomTitle_1")).toBeDefined();
-    expect(screen.getByText("roomTitle_2")).toBeDefined();
+    for (let chatRoom of chatRoomListMock) {
+      expect(screen.getByText(chatRoom.title)).toBeDefined();
+    }
 
     expect(screen.getByText("Select or create a Chat Room")).toBeDefined();
   });
 });
 
-it("Should display selected chat room", () => {
-  renderComponent({
-    chatRoomList: __MOCKED_CHAT_ROOM_LIST__,
+describe("Dashboard acts correctly", () => {
+  it("Should select a chat room", async () => {
+    renderComponent({
+      chatRoomList: chatRoomListMock,
+      mocks: [
+        getJoinChatRoomDocumentMock(
+          {
+            authorName: "John Doe",
+            roomIdToJoin: "roomId_1",
+            currentRoomId: undefined,
+          },
+          chatRoomListMock[0]
+        ),
+      ],
+    });
+    const chatRoomToSelect = chatRoomListMock[0];
+    const chatRoomsAside = screen.getByTestId("aside-chat-rooms");
+    const chatRoomButton = within(chatRoomsAside).getByRole("button", {
+      name: chatRoomToSelect.title,
+    });
+
+    expect(chatRoomButton).toBeInTheDocument();
+
+    expect(
+      screen.getByText("Select or create a Chat Room")
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(chatRoomToSelect.description)
+    ).not.toBeInTheDocument();
+
+    await userEvent.click(chatRoomButton);
+
+    expect(
+      await screen.findByText(chatRoomToSelect.description)
+    ).toBeInTheDocument();
+
+    expect(
+      screen.queryByText("Select or create a Chat Room")
+    ).not.toBeInTheDocument();
   });
-
-  const chatRoomsAside = screen.getByTestId("aside-chat-rooms");
-  const buttons = within(chatRoomsAside).getAllByRole("button");
-
-  expect(buttons).toHaveLength(3);
-  expect(buttons[0]).toHaveTextContent("roomTitle_1");
-  expect(buttons[1]).toHaveTextContent("roomTitle_2");
-  expect(buttons[2]).toHaveTextContent("ADD");
-  expect(screen.getByText("Select or create a Chat Room")).toBeDefined();
 });
-
-// describe("Dashboard acts correctly", () => {
-//   it("Should select a chat room", async () => {
-//     renderComponent({
-//       chatRoomList: __MOCKED_CHAT_ROOM_LIST__,
-//     });
-
-//     const chatRoomsAside = screen.getByTestId("aside-chat-rooms");
-//     const chatRoomButton = within(chatRoomsAside).getAllByRole("button", {
-//       name: "TODO",
-//     })[0];
-
-//     expect(chatRoomButton).toHaveTextContent("roomTitle_1");
-//     expect(screen.getByText("Select or create a Chat Room")).toBeDefined();
-
-//     await userEvent.click(chatRoomButton, { bubbles: true });
-//     await userEvent.click(screen.getByText("roomTitle_1"), { bubbles: true });
-//     await userEvent.click(chatRoomButton, { bubbles: true });
-//     fireEvent.click(chatRoomButton, { bubbles: true });
-//     expect(chatRoomButton).toHaveBeenCalledTimes(1);
-//     // await waitFor(() => screen.getByText("roomDescription_1"));
-//     screen.debug();
-//     // expect(await screen.findByText("Select or create a Chat Room")).toBeDefined();
-//   });
-// });
